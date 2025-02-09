@@ -13,18 +13,18 @@ public class Gerencia {
     private Long idGerencia;
 
     @Column(name = "gerencia_nombre", length = 50, nullable = false)
-    private String nombre;
+    private String gerenciaNombre;
 
     @OneToMany(mappedBy = "gerencia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Departamento> departamentos;
+    private Set<Departamento> departamento;
 
     public Gerencia() {
     }
 
     public Gerencia(Long idGerencia, String nombre, Set<Departamento> departamentos) {
         this.idGerencia = idGerencia;
-        this.nombre = nombre;
-        this.departamentos = departamentos;
+        this.gerenciaNombre = nombre;
+        this.departamento = departamentos;
     }
 
     public Long getIdGerencia() {
@@ -35,20 +35,20 @@ public class Gerencia {
         this.idGerencia = idGerencia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getGerenciaNombre() {
+        return gerenciaNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setGerenciaNombre(String nombre) {
+        this.gerenciaNombre = nombre;
     }
 
-    public Set<Departamento> getDepartamentos() {
-        return departamentos;
+    public Set<Departamento> getDepartamento() {
+        return departamento;
     }
 
-    public void setDepartamentos(Set<Departamento> departamentos) {
-        this.departamentos = departamentos;
+    public void setDepartamento(Set<Departamento> departamentos) {
+        this.departamento = departamentos;
     }
 
    

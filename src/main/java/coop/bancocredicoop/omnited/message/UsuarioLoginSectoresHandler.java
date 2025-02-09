@@ -3,14 +3,14 @@ package coop.bancocredicoop.omnited.message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON;
 import coop.bancocredicoop.omnited.exposition.SectorDTO;
-import coop.bancocredicoop.omnited.message.models.LoginSectores;
+import coop.bancocredicoop.omnited.message.models.SectorDatos;
 import coop.bancocredicoop.omnited.service.db.SectorService;
-import coop.bancocredicoop.omnited.service.rabbit.MessageHandler;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitSenderService;
 import java.util.Set;
 import java.util.stream.Collectors;
+import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
-public class UsuarioLoginSectoresHandler implements MessageHandler {
+public class UsuarioLoginSectoresHandler implements RabbitMessageHandler {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final SectorService sectorService;
@@ -25,10 +25,10 @@ public class UsuarioLoginSectoresHandler implements MessageHandler {
     public void handle(String jsonPayload, String idMensaje) throws Exception {
         
         // Mapear el nodo al objeto UsuarioDatos
-        LoginSectores loginSectores = objectMapper.readValue(jsonPayload, LoginSectores.class);
-
+        SectorDatos loginSectores = objectMapper.readValue(jsonPayload, SectorDatos.class);
+        
         Set<Long> sectores = loginSectores.getSectoresDatos().getSectores().stream()
-                    .map(LoginSectores.SectorInput::getId)
+                    .map(SectorDatos.SectorInput::getIdSector)
                     .collect(Collectors.toSet());
         
         // Buscar el usuario en la base de datos
@@ -39,6 +39,7 @@ public class UsuarioLoginSectoresHandler implements MessageHandler {
 
         // Enviar el mensaje serializado a RabbitMQ
         processMessage("usuariologinsectoresDB", sectorJson, idMensaje);
+        
     }
 
     /**

@@ -4,36 +4,38 @@ import java.util.Set;
 
 public class UsuarioDTO {
     private Long idUsuario;
-    private String nombre;
-    private String apellido;
-    private String usuario;
-    private String correo;
-    private PerfilDTO perfil;
-    private CondicionDTO condicion;
-    private Set<HabilidadDTO> habilidades;
-    private Set<EstadoDTO> estados;
-    private Set<SectorDTO> sectores;
-    private Set<PermisoDTO> permisosAdministracion; // Agrupación de permisos
-    private Set<PermisoDTO> permisosSupervision; // Agrupación de permisos
-    private Set<PermisoDTO> permisosOperacion; // Agrupación de permisos
+    private String usuarioNombre;
+    private String usuarioApellido;
+    private String usuarioUsuario;
+    private String usuarioCorreo;
+    private ExtensionDTO usuarioExtension;
+    private PerfilDTO usuarioPerfil;
+    private CondicionDTO usuarioCondicion;
+    private Set<HabilidadDTO> usuarioHabilidad;
+    private Set<EstadoDTO> usuarioEstado;
+    private Set<SectorDTO> usuarioSector;
+    private Set<PermisoDTO> usuarioPermisoAdministracion; // Agrupación de permisos
+    private Set<PermisoDTO> usuarioPermisoSupervision; // Agrupación de permisos
+    private Set<PermisoDTO> usuarioPermisoOperacion; // Agrupación de permisos
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(Long idUsuario, String nombre, String apellido, String usuario, String correo, PerfilDTO perfil, CondicionDTO condicion, Set<HabilidadDTO> habilidades, Set<EstadoDTO> estados, Set<SectorDTO> sectores, Set<PermisoDTO> permisosAdministracion, Set<PermisoDTO> permisosSupervision, Set<PermisoDTO> permisosOperacion) {
+    public UsuarioDTO(Long idUsuario, String usuarioNombre, String usuarioApellido, String usuarioUsuario, String usuarioCorreo, ExtensionDTO usuarioExtension, PerfilDTO usuarioPerfil, CondicionDTO usuarioCondicion, Set<HabilidadDTO> usuarioHabilidad, Set<EstadoDTO> usuarioEstado, Set<SectorDTO> usuarioSector, Set<PermisoDTO> usuarioPermisoAdministracion, Set<PermisoDTO> usuarioPermisoSupervision, Set<PermisoDTO> usuarioPermisoOperacion) {
         this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.correo = correo;
-        this.perfil = perfil;
-        this.condicion = condicion;
-        this.habilidades = habilidades;
-        this.estados = estados;
-        this.sectores = sectores;
-        this.permisosAdministracion = permisosAdministracion;
-        this.permisosSupervision = permisosSupervision;
-        this.permisosOperacion = permisosOperacion;
+        this.usuarioNombre = usuarioNombre;
+        this.usuarioApellido = usuarioApellido;
+        this.usuarioUsuario = usuarioUsuario;
+        this.usuarioCorreo = usuarioCorreo;
+        this.usuarioExtension = usuarioExtension;
+        this.usuarioPerfil = usuarioPerfil;
+        this.usuarioCondicion = usuarioCondicion;
+        this.usuarioHabilidad = usuarioHabilidad;
+        this.usuarioEstado = usuarioEstado;
+        this.usuarioSector = usuarioSector;
+        this.usuarioPermisoAdministracion = usuarioPermisoAdministracion;
+        this.usuarioPermisoSupervision = usuarioPermisoSupervision;
+        this.usuarioPermisoOperacion = usuarioPermisoOperacion;
     }
 
     public Long getIdUsuario() {
@@ -44,99 +46,107 @@ public class UsuarioDTO {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsuarioNombre() {
+        return usuarioNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuarioNombre(String nombre) {
+        this.usuarioNombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getUsuarioApellido() {
+        return usuarioApellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setUsuarioApellido(String apellido) {
+        this.usuarioApellido = apellido;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsuarioUsuario() {
+        return usuarioUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuarioUsuario(String usuario) {
+        this.usuarioUsuario = usuario;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getUsuarioCorreo() {
+        return usuarioCorreo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setUsuarioCorreo(String correo) {
+        this.usuarioCorreo = correo;
     }
 
-    public PerfilDTO getPerfil() {
-        return perfil;
+    public ExtensionDTO getUsuarioExtension() {
+        return usuarioExtension;
     }
 
-    public void setPerfil(PerfilDTO perfil) {
-        this.perfil = perfil;
+    public void setUsuarioExtension(ExtensionDTO usuarioExtension) {
+        this.usuarioExtension = usuarioExtension;
+    }
+    
+    public PerfilDTO getUsuarioPerfil() {
+        return usuarioPerfil;
     }
 
-    public CondicionDTO getCondicion() {
-        return condicion;
+    public void setUsuarioPerfil(PerfilDTO perfil) {
+        this.usuarioPerfil = perfil;
     }
 
-    public void setCondicion(CondicionDTO condicion) {
-        this.condicion = condicion;
+    public CondicionDTO getUsuarioCondicion() {
+        return usuarioCondicion;
     }
 
-    public Set<HabilidadDTO> getHabilidades() {
-        return habilidades;
+    public void setUsuarioCondicion(CondicionDTO condicion) {
+        this.usuarioCondicion = condicion;
     }
 
-    public void setHabilidades(Set<HabilidadDTO> habilidades) {
-        this.habilidades = habilidades;
+    public Set<HabilidadDTO> getUsuarioHabilidad() {
+        return usuarioHabilidad;
     }
 
-    public Set<EstadoDTO> getEstados() {
-        return estados;
+    public void setUsuarioHabilidad(Set<HabilidadDTO> habilidades) {
+        this.usuarioHabilidad = habilidades;
     }
 
-    public void setEstados(Set<EstadoDTO> estados) {
-        this.estados = estados;
+    public Set<EstadoDTO> getUsuarioEstado() {
+        return usuarioEstado;
     }
 
-    public Set<SectorDTO> getSectores() {
-        return sectores;
+    public void setUsuarioEstado(Set<EstadoDTO> estados) {
+        this.usuarioEstado = estados;
     }
 
-    public void setSectores(Set<SectorDTO> sectores) {
-        this.sectores = sectores;
+    public Set<SectorDTO> getUsuarioSector() {
+        return usuarioSector;
     }
 
-    public Set<PermisoDTO> getPermisosAdministracion() {
-        return permisosAdministracion;
+    public void setUsuarioSector(Set<SectorDTO> sectores) {
+        this.usuarioSector = sectores;
     }
 
-    public void setPermisosAdministracion(Set<PermisoDTO> permisosAdministracion) {
-        this.permisosAdministracion = permisosAdministracion;
+    public Set<PermisoDTO> getUsuarioPermisoAdministracion() {
+        return usuarioPermisoAdministracion;
     }
 
-    public Set<PermisoDTO> getPermisosSupervision() {
-        return permisosSupervision;
+    public void setUsuarioPermisoAdministracion(Set<PermisoDTO> permisosAdministracion) {
+        this.usuarioPermisoAdministracion = permisosAdministracion;
     }
 
-    public void setPermisosSupervision(Set<PermisoDTO> permisosSupervision) {
-        this.permisosSupervision = permisosSupervision;
+    public Set<PermisoDTO> getUsuarioPermisoSupervision() {
+        return usuarioPermisoSupervision;
     }
 
-    public Set<PermisoDTO> getPermisosOperacion() {
-        return permisosOperacion;
+    public void setUsuarioPermisoSupervision(Set<PermisoDTO> permisosSupervision) {
+        this.usuarioPermisoSupervision = permisosSupervision;
     }
 
-    public void setPermisosOperacion(Set<PermisoDTO> permisosOperacion) {
-        this.permisosOperacion = permisosOperacion;
+    public Set<PermisoDTO> getUsuarioPermisoOperacion() {
+        return usuarioPermisoOperacion;
+    }
+
+    public void setUsuarioPermisoOperacion(Set<PermisoDTO> permisosOperacion) {
+        this.usuarioPermisoOperacion = permisosOperacion;
     }
 }

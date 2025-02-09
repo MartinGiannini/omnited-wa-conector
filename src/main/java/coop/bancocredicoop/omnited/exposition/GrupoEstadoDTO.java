@@ -3,43 +3,43 @@ package coop.bancocredicoop.omnited.exposition;
 import java.util.Set;
 
 public class GrupoEstadoDTO {
-    private Long id;
-    private String nombre;
-    private Set<EstadoDTO> estados;
+    private Long idGrupoEstado;
+    private String grupoEstadoNombre;
+    private Set<EstadoDTO> estado;
     private SectorDTO sector;
 
     public GrupoEstadoDTO(Long id, String nombre, Set<EstadoDTO> estados, SectorDTO sector) {
-        this.id = id;
-        this.nombre = nombre;
-        this.estados = estados;
+        this.idGrupoEstado = id;
+        this.grupoEstadoNombre = nombre;
+        this.estado = estados;
         this.sector = sector;
     }
 
     public GrupoEstadoDTO() {
     }
     
-    public Long getId() {
-        return id;
+    public Long getIdGrupoEstado() {
+        return idGrupoEstado;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdGrupoEstado(Long id) {
+        this.idGrupoEstado = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getGrupoEstadoNombre() {
+        return grupoEstadoNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setGrupoEstadoNombre(String nombre) {
+        this.grupoEstadoNombre = nombre;
     }
 
-    public Set<EstadoDTO> getEstados() {
-        return estados;
+    public Set<EstadoDTO> getEstado() {
+        return estado;
     }
 
-    public void setEstados(Set<EstadoDTO> estados) {
-        this.estados = estados;
+    public void setEstado(Set<EstadoDTO> estados) {
+        this.estado = estados;
     }
 
     public SectorDTO getSector() {

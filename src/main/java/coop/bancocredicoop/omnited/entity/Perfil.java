@@ -14,18 +14,18 @@ public class Perfil {
     private Long idPerfil;
 
     @Column(name = "perfil_nombre", length = 100, nullable = false)
-    private String nombre;
+    private String perfilNombre;
 
-    @OneToMany(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Usuario> usuarios;
+    @OneToMany(mappedBy = "usuarioPerfil", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Usuario> usuario;
 
     public Perfil() {
     }
 
     public Perfil(Long idPerfil, String nombre, Set<Usuario> usuarios) {
         this.idPerfil = idPerfil;
-        this.nombre = nombre;
-        this.usuarios = usuarios;
+        this.perfilNombre = nombre;
+        this.usuario = usuarios;
     }
 
     public Long getIdPerfil() {
@@ -36,20 +36,20 @@ public class Perfil {
         this.idPerfil = idPerfil;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getPerfilNombre() {
+        return perfilNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPerfilNombre(String nombre) {
+        this.perfilNombre = nombre;
     }
 
-    public Set<Usuario> getUsuarios() {
-        return usuarios;
+    public Set<Usuario> getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuario(Set<Usuario> usuarios) {
+        this.usuario = usuarios;
     }
 
     

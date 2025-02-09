@@ -13,26 +13,26 @@ public class Estado {
     private Long idEstado;
 
     @Column(name = "estado_nombre", length = 100)
-    private String nombre;
+    private String estadoNombre;
 
     @Column(name = "estado_productivo", nullable = false)
-    private Boolean productivo;
+    private Boolean estadoProductivo;
 
     @Column(name = "estado_dedicado_usuario_final", nullable = false)
-    private Boolean dedicadoUsuarioFinal;
+    private Boolean estadoDedicadoUsuarioFinal;
 
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioEstado> usuarios;
+    private Set<UsuarioEstado> usuarioEstado;
 
     public Estado() {
     }
 
     public Estado(Long idEstado, String nombre, Boolean productivo, Boolean dedicadoUsuarioFinal, Set<UsuarioEstado> usuarios) {
         this.idEstado = idEstado;
-        this.nombre = nombre;
-        this.productivo = productivo;
-        this.dedicadoUsuarioFinal = dedicadoUsuarioFinal;
-        this.usuarios = usuarios;
+        this.estadoNombre = nombre;
+        this.estadoProductivo = productivo;
+        this.estadoDedicadoUsuarioFinal = dedicadoUsuarioFinal;
+        this.usuarioEstado = usuarios;
     }
 
     public Long getIdEstado() {
@@ -43,36 +43,36 @@ public class Estado {
         this.idEstado = idEstado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEstadoNombre() {
+        return estadoNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstadoNombre(String nombre) {
+        this.estadoNombre = nombre;
     }
 
-    public Boolean getProductivo() {
-        return productivo;
+    public Boolean getEstadoProductivo() {
+        return estadoProductivo;
     }
 
-    public void setProductivo(Boolean productivo) {
-        this.productivo = productivo;
+    public void setEstadoProductivo(Boolean productivo) {
+        this.estadoProductivo = productivo;
     }
 
-    public Boolean getDedicadoUsuarioFinal() {
-        return dedicadoUsuarioFinal;
+    public Boolean getEstadoDedicadoUsuarioFinal() {
+        return estadoDedicadoUsuarioFinal;
     }
 
-    public void setDedicadoUsuarioFinal(Boolean dedicadoUsuarioFinal) {
-        this.dedicadoUsuarioFinal = dedicadoUsuarioFinal;
+    public void setEstadoDedicadoUsuarioFinal(Boolean dedicadoUsuarioFinal) {
+        this.estadoDedicadoUsuarioFinal = dedicadoUsuarioFinal;
     }
 
-    public Set<UsuarioEstado> getUsuarios() {
-        return usuarios;
+    public Set<UsuarioEstado> getUsuarioEstado() {
+        return usuarioEstado;
     }
 
-    public void setUsuarios(Set<UsuarioEstado> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuarioEstado(Set<UsuarioEstado> usuarios) {
+        this.usuarioEstado = usuarios;
     }
     
     

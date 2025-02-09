@@ -13,18 +13,18 @@ public class PermisoOperacion {
     private Long idPermisoOperacion;
 
     @Column(name = "permiso_operacion_nombre", nullable = false, length = 50)
-    private String nombre;
+    private String PermisoOperacionNombre;
 
-    @OneToMany(mappedBy = "permiso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioPermisoOperacion> usuarios;
+    @OneToMany(mappedBy = "permisoOperacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsuarioPermisoOperacion> usuarioPermisoOperacion;
 
     public PermisoOperacion() {
     }
 
     public PermisoOperacion(Long idPermisoOperacion, String nombre, Set<UsuarioPermisoOperacion> usuarios) {
         this.idPermisoOperacion = idPermisoOperacion;
-        this.nombre = nombre;
-        this.usuarios = usuarios;
+        this.PermisoOperacionNombre = nombre;
+        this.usuarioPermisoOperacion = usuarios;
     }
 
     public Long getIdPermisoOperacion() {
@@ -35,19 +35,19 @@ public class PermisoOperacion {
         this.idPermisoOperacion = idPermisoOperacion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getPermisoOperacionNombre() {
+        return PermisoOperacionNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPermisoOperacionNombre(String nombre) {
+        this.PermisoOperacionNombre = nombre;
     }
 
-    public Set<UsuarioPermisoOperacion> getUsuarios() {
-        return usuarios;
+    public Set<UsuarioPermisoOperacion> getUsuarioPermisoOperacion() {
+        return usuarioPermisoOperacion;
     }
 
-    public void setUsuarios(Set<UsuarioPermisoOperacion> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuarioPermisoOperacion(Set<UsuarioPermisoOperacion> usuarios) {
+        this.usuarioPermisoOperacion = usuarios;
     }
 }

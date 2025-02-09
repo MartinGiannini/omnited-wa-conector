@@ -1,30 +1,30 @@
 package coop.bancocredicoop.omnited.exposition;
 
 public class DepartamentoDTO {
-    private Long id;
-    private String nombre;
+    private Long idDepartamento;
+    private String departamentoNombre;
 
     public DepartamentoDTO() {
     }
 
     public DepartamentoDTO(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        this.idDepartamento = id;
+        this.departamentoNombre = nombre;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdDepartamento() {
+        return idDepartamento;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdDepartamento(Long id) {
+        this.idDepartamento = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDepartamentoNombre() {
+        return departamentoNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDepartamentoNombre(String nombre) {
+        this.departamentoNombre = nombre;
     }
 }

@@ -2,14 +2,14 @@ package coop.bancocredicoop.omnited.exposition;
 
 public class EstrategiaDTO {
     private Long idEstrategia;
-    private String nombre;
-
-    public EstrategiaDTO() {
-    }
+    private String estrategiaNombre;
 
     public EstrategiaDTO(Long idEstrategia, String nombre) {
         this.idEstrategia = idEstrategia;
-        this.nombre = nombre;
+        this.estrategiaNombre = nombre;
+    }
+
+    public EstrategiaDTO() {
     }
 
     public Long getIdEstrategia() {
@@ -20,11 +20,11 @@ public class EstrategiaDTO {
         this.idEstrategia = idEstrategia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEstrategiaNombre() {
+        return estrategiaNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstrategiaNombre(String nombre) {
+        this.estrategiaNombre = nombre;
     }
 }

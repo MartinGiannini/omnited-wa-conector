@@ -13,39 +13,39 @@ public class GrupoHabilidad {
     private Long idGrupoHabilidad;
 
     @Column(name = "grupo_habilidad_nombre")
-    private String nombre;
+    private String grupoHabilidadNombre;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sector", nullable = false)
     private Sector sector;
 
     @OneToMany(mappedBy = "grupoHabilidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GrupoHabilidadHabilidad> habilidades;
+    private Set<GrupoHabilidadHabilidad> grupoHabilidadHabilidad;
 
     public GrupoHabilidad() {
     }
 
     public GrupoHabilidad(Long id, String nombre, Sector sector, Set<GrupoHabilidadHabilidad> habilidades) {
         this.idGrupoHabilidad = id;
-        this.nombre = nombre;
+        this.grupoHabilidadNombre = nombre;
         this.sector = sector;
-        this.habilidades = habilidades;
+        this.grupoHabilidadHabilidad = habilidades;
     }
 
-    public Long getId() {
+    public Long getIdGrupoHabilidad() {
         return idGrupoHabilidad;
     }
 
-    public void setId(Long id) {
+    public void setIdGrupoHabilidad(Long id) {
         this.idGrupoHabilidad = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getGrupoHabilidadNombre() {
+        return grupoHabilidadNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setGrupoHabilidadNombre(String nombre) {
+        this.grupoHabilidadNombre = nombre;
     }
 
     public Sector getSector() {
@@ -56,12 +56,12 @@ public class GrupoHabilidad {
         this.sector = sector;
     }
 
-    public Set<GrupoHabilidadHabilidad> getHabilidades() {
-        return habilidades;
+    public Set<GrupoHabilidadHabilidad> getGrupoHabilidadHabilidad() {
+        return grupoHabilidadHabilidad;
     }
 
-    public void setHabilidades(Set<GrupoHabilidadHabilidad> habilidades) {
-        this.habilidades = habilidades;
+    public void setGrupoHabilidadHabilidad(Set<GrupoHabilidadHabilidad> habilidades) {
+        this.grupoHabilidadHabilidad = habilidades;
     }
     
     

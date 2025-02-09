@@ -13,18 +13,18 @@ public class Condicion {
     private Long idCondicion;
 
     @Column(name = "condicion_nombre", length = 50, nullable = false)
-    private String nombre;
+    private String condicionNombre;
 
-    @OneToMany(mappedBy = "condicion", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Usuario> usuarios;
+    @OneToMany(mappedBy = "usuarioCondicion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Usuario> usuario;
 
     public Condicion() {
     }
 
     public Condicion(Long idCondicion, String nombre, Set<Usuario> usuarios) {
         this.idCondicion = idCondicion;
-        this.nombre = nombre;
-        this.usuarios = usuarios;
+        this.condicionNombre = nombre;
+        this.usuario = usuarios;
     }
 
     public Long getIdCondicion() {
@@ -35,20 +35,20 @@ public class Condicion {
         this.idCondicion = idCondicion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCondicionNombre() {
+        return condicionNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCondicionNombre(String nombre) {
+        this.condicionNombre = nombre;
     }
 
-    public Set<Usuario> getUsuarios() {
-        return usuarios;
+    public Set<Usuario> getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuario(Set<Usuario> usuarios) {
+        this.usuario = usuarios;
     }
 
     

@@ -1,29 +1,30 @@
 package coop.bancocredicoop.omnited.exposition;
 
 public class PermisoDTO {
-    private Long id;
-    private String nombre;
+    private Long idPermiso;
+    private String permisoNombre;
 
-    public PermisoDTO() {}
-    
     public PermisoDTO(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        this.idPermiso = id;
+        this.permisoNombre = nombre;
     }
 
-    public Long getId() {
-        return id;
+    public PermisoDTO() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdPermiso() {
+        return idPermiso;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setIdPermiso(Long id) {
+        this.idPermiso = id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getPermisoNombre() {
+        return permisoNombre;
+    }
+
+    public void setPermisoNombre(String nombre) {
+        this.permisoNombre = nombre;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Objects;
 @Embeddable
 public class GrupoHabilidadId implements Serializable {
 
+    /*
     private Long grupoHabilidadId;
     private Long habilidadId;
 
@@ -41,4 +42,5 @@ public class GrupoHabilidadId implements Serializable {
     public int hashCode() {
         return Objects.hash(grupoHabilidadId, habilidadId);
     }
+*/
 }

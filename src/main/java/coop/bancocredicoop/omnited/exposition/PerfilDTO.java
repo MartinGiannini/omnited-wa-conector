@@ -1,29 +1,29 @@
 package coop.bancocredicoop.omnited.exposition;
 
 public class PerfilDTO {
-    private Long id;
-    private String nombre;
+    private Long idPerfil;
+    private String perfilNombre;
 
     public PerfilDTO(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        this.idPerfil = id;
+        this.perfilNombre = nombre;
     }
 
     public PerfilDTO() {}
 
-    public Long getId() {
-        return id;
+    public Long getIdPerfil() {
+        return idPerfil;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPerfil(Long id) {
+        this.idPerfil = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getPerfilNombre() {
+        return perfilNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPerfilNombre(String nombre) {
+        this.perfilNombre = nombre;
     }
 }

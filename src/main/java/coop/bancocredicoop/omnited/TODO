@@ -1,0 +1,1 @@
+1) La clase SectorDatos hay que corregirla, utilizar SectorDTO y hacer las modificaciones en los Handler para que utilicen la clase modificada en vez del Set<Long>

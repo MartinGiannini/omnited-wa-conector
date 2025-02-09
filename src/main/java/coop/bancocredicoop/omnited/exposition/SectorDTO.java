@@ -3,99 +3,99 @@ package coop.bancocredicoop.omnited.exposition;
 import java.util.Set;
 
 public class SectorDTO {
-    private Long id;
-    private String nombre;
-    private DepartamentoDTO departamento;
-    private Set<EstadoDTO> Estados;
-    private Set<HabilidadDTO> Habilidades;
-    private Set<ColaDTO> colas;
-    private Set<UsuarioDTO> usuarios;
-    private Set<GrupoEstadoDTO> grupoEstados;
-    private Set<GrupoHabilidadDTO> grupoHabilidades;
+    private Long idSector;
+    private String sectorNombre;
+    private DepartamentoDTO sectorDepartamento;
+    private Set<EstadoDTO> sectorEstado;
+    private Set<HabilidadDTO> sectorHabilidad;
+    private Set<ColaDTO> sectorCola;
+    private Set<UsuarioDTO> sectorUsuario;
+    private Set<GrupoEstadoDTO> sectorGrupoEstado;
+    private Set<GrupoHabilidadDTO> sectorGrupoHabilidad;
 
     public SectorDTO(Long id, String nombre, DepartamentoDTO departamento, Set<EstadoDTO> Estados, Set<HabilidadDTO> Habilidades, Set<ColaDTO> colas, Set<UsuarioDTO> usuarios, Set<GrupoEstadoDTO> grupoEstados, Set<GrupoHabilidadDTO> grupoHabilidades) {
-        this.id = id;
-        this.nombre = nombre;
-        this.departamento = departamento;
-        this.Estados = Estados;
-        this.Habilidades = Habilidades;
-        this.colas = colas;
-        this.usuarios = usuarios;
-        this.grupoEstados = grupoEstados;
-        this.grupoHabilidades = grupoHabilidades;
+        this.idSector = id;
+        this.sectorNombre = nombre;
+        this.sectorDepartamento = departamento;
+        this.sectorEstado = Estados;
+        this.sectorHabilidad = Habilidades;
+        this.sectorCola = colas;
+        this.sectorUsuario = usuarios;
+        this.sectorGrupoEstado = grupoEstados;
+        this.sectorGrupoHabilidad = grupoHabilidades;
     }
     
     public SectorDTO() {}
 
-    public Long getId() {
-        return id;
+    public Long getIdSector() {
+        return idSector;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdSector(Long id) {
+        this.idSector = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getSectorNombre() {
+        return sectorNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setSectorNombre(String nombre) {
+        this.sectorNombre = nombre;
     }
 
-    public DepartamentoDTO getDepartamento() {
-        return departamento;
+    public DepartamentoDTO getSectorDepartamento() {
+        return sectorDepartamento;
     }
 
-    public void setDepartamento(DepartamentoDTO departamento) {
-        this.departamento = departamento;
+    public void setSectorDepartamento(DepartamentoDTO departamento) {
+        this.sectorDepartamento = departamento;
     }
     
-    public Set<EstadoDTO> getEstados() {
-        return Estados;
+    public Set<EstadoDTO> getSectorEstado() {
+        return sectorEstado;
     }
 
-    public void setEstados(Set<EstadoDTO> Estados) {
-        this.Estados = Estados;
+    public void setSectorEstado(Set<EstadoDTO> Estados) {
+        this.sectorEstado = Estados;
     }
 
-    public Set<HabilidadDTO> getHabilidades() {
-        return Habilidades;
+    public Set<HabilidadDTO> getSectorHabilidad() {
+        return sectorHabilidad;
     }
 
-    public void setHabilidades(Set<HabilidadDTO> Habilidades) {
-        this.Habilidades = Habilidades;
+    public void setSectorHabilidad(Set<HabilidadDTO> Habilidades) {
+        this.sectorHabilidad = Habilidades;
     }
 
-    public Set<ColaDTO> getColas() {
-        return colas;
+    public Set<ColaDTO> getSectorCola() {
+        return sectorCola;
     }
 
-    public void setColas(Set<ColaDTO> colas) {
-        this.colas = colas;
+    public void setSectorCola(Set<ColaDTO> colas) {
+        this.sectorCola = colas;
     }
 
-    public Set<UsuarioDTO> getUsuarios() {
-        return usuarios;
+    public Set<UsuarioDTO> getSectorUsuario() {
+        return sectorUsuario;
     }
 
-    public void setUsuarios(Set<UsuarioDTO> usuarios) {
-        this.usuarios = usuarios;
+    public void setSectorUsuario(Set<UsuarioDTO> usuarios) {
+        this.sectorUsuario = usuarios;
     }
 
-    public Set<GrupoEstadoDTO> getGrupoEstados() {
-        return grupoEstados;
+    public Set<GrupoEstadoDTO> getSectorGrupoEstado() {
+        return sectorGrupoEstado;
     }
 
-    public void setGrupoEstados(Set<GrupoEstadoDTO> grupoEstados) {
-        this.grupoEstados = grupoEstados;
+    public void setSectorGrupoEstado(Set<GrupoEstadoDTO> grupoEstados) {
+        this.sectorGrupoEstado = grupoEstados;
     }
 
-    public Set<GrupoHabilidadDTO> getGrupoHabilidades() {
-        return grupoHabilidades;
+    public Set<GrupoHabilidadDTO> getSectorGrupoHabilidad() {
+        return sectorGrupoHabilidad;
     }
 
-    public void setGrupoHabilidades(Set<GrupoHabilidadDTO> grupoHabilidades) {
-        this.grupoHabilidades = grupoHabilidades;
+    public void setSectorGrupoHabilidad(Set<GrupoHabilidadDTO> grupoHabilidades) {
+        this.sectorGrupoHabilidad = grupoHabilidades;
     }
 }

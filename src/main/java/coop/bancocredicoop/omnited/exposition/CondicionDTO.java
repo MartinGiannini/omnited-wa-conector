@@ -1,29 +1,29 @@
 package coop.bancocredicoop.omnited.exposition;
 
 public class CondicionDTO {
-    private Long id;
-    private String nombre;
+    private Long idCondicion;
+    private String condicionNombre;
 
     public CondicionDTO(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        this.idCondicion = id;
+        this.condicionNombre = nombre;
     }
 
     public CondicionDTO() {}
 
-    public Long getId() {
-        return id;
+    public Long getIdCondicion() {
+        return idCondicion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCondicion(Long id) {
+        this.idCondicion = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCondicionNombre() {
+        return condicionNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCondicionNombre(String nombre) {
+        this.condicionNombre = nombre;
     }
 }

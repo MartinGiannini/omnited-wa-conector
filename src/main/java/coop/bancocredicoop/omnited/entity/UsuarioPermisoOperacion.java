@@ -17,7 +17,7 @@ public class UsuarioPermisoOperacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_permiso_operacion", nullable = false)
-    private PermisoOperacion permiso;
+    private PermisoOperacion permisoOperacion;
 
     public UsuarioPermisoOperacion() {
     }
@@ -25,7 +25,7 @@ public class UsuarioPermisoOperacion {
     public UsuarioPermisoOperacion(Long idUsuarioPermisoOperacion, Usuario usuario, PermisoOperacion permiso) {
         this.idUsuarioPermisoOperacion = idUsuarioPermisoOperacion;
         this.usuario = usuario;
-        this.permiso = permiso;
+        this.permisoOperacion = permiso;
     }
 
     public Long getIdUsuarioPermisoOperacion() {
@@ -44,11 +44,11 @@ public class UsuarioPermisoOperacion {
         this.usuario = usuario;
     }
 
-    public PermisoOperacion getPermiso() {
-        return permiso;
+    public PermisoOperacion getPermisoOperacion() {
+        return permisoOperacion;
     }
 
-    public void setPermiso(PermisoOperacion permiso) {
-        this.permiso = permiso;
+    public void setPermisoOperacion(PermisoOperacion permiso) {
+        this.permisoOperacion = permiso;
     }
 }

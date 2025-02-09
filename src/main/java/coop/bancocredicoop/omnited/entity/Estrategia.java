@@ -13,18 +13,18 @@ public class Estrategia {
     private Long idEstrategia;
 
     @Column(name = "estrategia_nombre", length = 100, nullable = false)
-    private String nombre;
+    private String estrategiaNombre;
 
     @OneToMany(mappedBy = "estrategia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Cola> colas;
+    private Set<Cola> cola;
 
     public Estrategia() {
     }
 
-    public Estrategia(Long idEstrategia, String nombre, Set<Cola> colas) {
+    public Estrategia(Long idEstrategia, String nombreEstrategia, Set<Cola> colas) {
         this.idEstrategia = idEstrategia;
-        this.nombre = nombre;
-        this.colas = colas;
+        this.estrategiaNombre = nombreEstrategia;
+        this.cola = colas;
     }
 
     public Long getIdEstrategia() {
@@ -35,20 +35,20 @@ public class Estrategia {
         this.idEstrategia = idEstrategia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEstrategiaNombre() {
+        return estrategiaNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstrategiaNombre(String nombre) {
+        this.estrategiaNombre = nombre;
     }
 
-    public Set<Cola> getColas() {
-        return colas;
+    public Set<Cola> getEstrategiaCola() {
+        return cola;
     }
 
-    public void setColas(Set<Cola> colas) {
-        this.colas = colas;
+    public void setEstrategiaCola(Set<Cola> colas) {
+        this.cola = colas;
     }
 
     

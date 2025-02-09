@@ -11,8 +11,10 @@ public interface GrupoEstadoRepository extends JpaRepository<GrupoEstado, Long> 
 
     @Query("SELECT DISTINCT ge FROM GrupoEstado ge "
          + "LEFT JOIN FETCH ge.sector "
-         + "LEFT JOIN FETCH ge.estados ges "
+         + "LEFT JOIN FETCH ge.grupoEstadoEstado ges "
          + "LEFT JOIN FETCH ges.estado "
          + "WHERE ge.sector.idSector IN :sectorIds")
     Set<GrupoEstado> findGrupoEstadosBySectores(Set<Long> sectorIds);
+ 
+    
 }

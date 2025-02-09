@@ -2,12 +2,16 @@ package coop.bancocredicoop.omnited.service.db;
 
 import coop.bancocredicoop.omnited.entity.Sector;
 import coop.bancocredicoop.omnited.exposition.ColaDTO;
+import coop.bancocredicoop.omnited.exposition.CondicionDTO;
 import coop.bancocredicoop.omnited.exposition.DepartamentoDTO;
 import coop.bancocredicoop.omnited.exposition.EstadoDTO;
 import coop.bancocredicoop.omnited.exposition.EstrategiaDTO;
+import coop.bancocredicoop.omnited.exposition.ExtensionDTO;
 import coop.bancocredicoop.omnited.exposition.GrupoEstadoDTO;
 import coop.bancocredicoop.omnited.exposition.GrupoHabilidadDTO;
 import coop.bancocredicoop.omnited.exposition.HabilidadDTO;
+import coop.bancocredicoop.omnited.exposition.PerfilDTO;
+import coop.bancocredicoop.omnited.exposition.PermisoDTO;
 import coop.bancocredicoop.omnited.exposition.SectorDTO;
 import coop.bancocredicoop.omnited.exposition.UsuarioDTO;
 import coop.bancocredicoop.omnited.repository.SectorRepository;
@@ -30,117 +34,136 @@ public class SectorService {
         // Obtiene los sectores con las relaciones necesarias
         Set<Sector> sectores = sectorRepository.findByIdInWithDetails(sectorIds);
 
-        /**
-         * 
-            private Long id;
-            private String nombre;
-            private DepartamentoDTO departamento;
-            private Set<EstadoDTO> Estados;
-            private Set<HabilidadDTO> Habilidades;
-            private Set<ColaDTO> colas;
-            private Set<UsuarioDTO> usuarios;
-            private Set<GrupoEstadoDTO> grupoEstados;
-            private Set<GrupoHabilidadDTO> grupoHabilidades;
-         */
-        
         return sectores.stream().map(sector -> new SectorDTO(
                 sector.getIdSector(),
-                sector.getNombre(),
-                
+                sector.getSectorNombre(),
                 // Mapeo del departamento
                 new DepartamentoDTO(
-                        sector.getDepartamento().getIdDepartamento(),
-                        sector.getDepartamento().getNombre()
+                        sector.getSectorDepartamento().getIdDepartamento(),
+                        sector.getSectorDepartamento().getDepartamentoNombre()
                 ),
-                
                 // Mapeo de estados
-                sector.getEstados().stream()
+                sector.getSectorEstado().stream()
                         .map(sectorEstado -> new EstadoDTO(
                         sectorEstado.getEstado().getIdEstado(),
-                        sectorEstado.getEstado().getNombre(),
-                        sectorEstado.getEstado().getProductivo(),
-                        sectorEstado.getEstado().getDedicadoUsuarioFinal()
+                        sectorEstado.getEstado().getEstadoNombre(),
+                        sectorEstado.getEstado().getEstadoProductivo(),
+                        sectorEstado.getEstado().getEstadoDedicadoUsuarioFinal()
                 ))
                         .collect(Collectors.toSet()),
-                
                 // Mapeo de habilidades
-                sector.getHabilidades().stream()
+                sector.getSectorHabilidad().stream()
                         .map(sectorHabilidad -> new HabilidadDTO(
                         sectorHabilidad.getHabilidad().getIdHabilidad(),
-                        sectorHabilidad.getHabilidad().getNombre(),
+                        sectorHabilidad.getHabilidad().getHabilidadNombre(),
                         null
                 ))
                         .collect(Collectors.toSet()),
-                
                 // Mapeo de colas
-                sector.getColas().stream()
+                sector.getCola().stream()
                         .map(cola -> new ColaDTO(
                         cola.getIdCola(),
-                        cola.getNombre(),
+                        cola.getColaNombre(),
                         new EstrategiaDTO(
                                 cola.getEstrategia().getIdEstrategia(),
-                                cola.getEstrategia().getNombre()
+                                cola.getEstrategia().getEstrategiaNombre()
                         ),
-                        cola.getRingueo(),
-                        cola.getEspera(),
-                        cola.getAutoPausa(),
-                        cola.getDesborde(),
-                        cola.getPrioridad(),
-                        cola.getHabilidades().stream().map(ch -> new HabilidadDTO(
+                        cola.getColaRingueo(),
+                        cola.getColaEspera(),
+                        cola.getColaAutoPausa(),
+                        cola.getColaDesborde(),
+                        cola.getColaPrioridad(),
+                        cola.getColaHabilidad().stream().map(ch -> new HabilidadDTO(
                         ch.getHabilidad().getIdHabilidad(),
-                        ch.getHabilidad().getNombre(),
+                        ch.getHabilidad().getHabilidadNombre(),
                         null
                 )).collect(Collectors.toSet())
                 ))
                         .collect(Collectors.toSet()),
                 // Mapeo de usuarios
-                sector.getUsuarios().stream()
+                sector.getUsuarioSector().stream()
                         .map(usuarioSector -> new UsuarioDTO(
                         usuarioSector.getUsuario().getIdUsuario(),
-                        usuarioSector.getUsuario().getNombre(),
-                        usuarioSector.getUsuario().getApellido(),
-                        usuarioSector.getUsuario().getUsuario(),
-                        usuarioSector.getUsuario().getCorreo(),
+                        usuarioSector.getUsuario().getUsuarioNombre(),
+                        usuarioSector.getUsuario().getUsuarioApellido(),
+                        usuarioSector.getUsuario().getUsuarioUsuario(),
+                        usuarioSector.getUsuario().getUsuarioCorreo(),
+                        new ExtensionDTO(
+                                usuarioSector.getUsuario().getUsuarioExtension().getIdExtension(),
+                                usuarioSector.getUsuario().getUsuarioExtension().getExtensionUri(),
+                                usuarioSector.getUsuario().getUsuarioExtension().getExtensionServer(),
+                                usuarioSector.getUsuario().getUsuarioExtension().getExtensionDominio(),
+                                usuarioSector.getUsuario().getUsuarioExtension().getExtensionUsername(),
+                                usuarioSector.getUsuario().getUsuarioExtension().getExtensionServer()
+                        ),
+                        new PerfilDTO(
+                                usuarioSector.getUsuario().getUsuarioPerfil().getIdPerfil(),
+                                usuarioSector.getUsuario().getUsuarioPerfil().getPerfilNombre()
+                        ),
+                        new CondicionDTO(
+                                usuarioSector.getUsuario().getUsuarioCondicion().getIdCondicion(),
+                                usuarioSector.getUsuario().getUsuarioCondicion().getCondicionNombre()
+                        ),
+                        usuarioSector.getUsuario().getUsuarioHabilidad().stream()
+                                .map(uh -> {
+                                    HabilidadDTO habilidadDTO = new HabilidadDTO();
+                                    habilidadDTO.setIdHabilidad(uh.getHabilidad().getIdHabilidad());
+                                    habilidadDTO.setHabilidadNombre(uh.getHabilidad().getHabilidadNombre());
+                                    habilidadDTO.setHabilidadValor(uh.getUsuarioHabilidadValor());
+                                    return habilidadDTO;
+                                })
+                                .collect(Collectors.toSet()),
+                        usuarioSector.getUsuario().getUsuarioEstado().stream()
+                                .map(ue -> {
+                                    EstadoDTO estadoDTO = new EstadoDTO();
+                                    estadoDTO.setIdEstado(ue.getEstado().getIdEstado());
+                                    estadoDTO.setEstadoNombre(ue.getEstado().getEstadoNombre());
+                                    estadoDTO.setEstadoProductivo(ue.getEstado().getEstadoProductivo());
+                                    estadoDTO.setEstadoDedicadoUsuarioFinal(ue.getEstado().getEstadoDedicadoUsuarioFinal());
+                                    return estadoDTO;
+                                })
+                                .collect(Collectors.toSet()),
                         null,
                         null,
                         null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
+                        usuarioSector.getUsuario().getUsuarioPermisoOperacion().stream()
+                                .map(po -> {
+                                    PermisoDTO permisoDTO = new PermisoDTO();
+                                    permisoDTO.setIdPermiso(po.getPermisoOperacion().getIdPermisoOperacion());
+                                    permisoDTO.setPermisoNombre(po.getPermisoOperacion().getPermisoOperacionNombre());
+                                    return permisoDTO;
+                                })
+                                .collect(Collectors.toSet())
                 ))
                         .collect(Collectors.toSet()),
-                
                 // Mapeo de Grupos de Estados
-                sector.getGruposEstado().stream()
+                sector.getGrupoEstado().stream()
                         .map(grupoEstado -> new GrupoEstadoDTO(
                         grupoEstado.getIdGrupoEstado(),
-                        grupoEstado.getNombre(),
-                        grupoEstado.getEstados().stream()
-                            .map(sectorEstado -> new EstadoDTO(
+                        grupoEstado.getGrupoEstadoNombre(),
+                        grupoEstado.getGrupoEstadoEstado().stream()
+                                .map(sectorEstado -> new EstadoDTO(
                                 sectorEstado.getEstado().getIdEstado(),
-                                sectorEstado.getEstado().getNombre(),
-                                sectorEstado.getEstado().getProductivo(),
-                                sectorEstado.getEstado().getDedicadoUsuarioFinal()
-                            )).collect(Collectors.toSet()),
+                                sectorEstado.getEstado().getEstadoNombre(),
+                                sectorEstado.getEstado().getEstadoProductivo(),
+                                sectorEstado.getEstado().getEstadoDedicadoUsuarioFinal()
+                        )).collect(Collectors.toSet()),
                         null
                 )).collect(Collectors.toSet()),
-                
                 // Mapeo de Grupos de Habilidades
-                sector.getGruposHabilidad().stream()
+                sector.getGrupoHabilidad().stream()
                         .map(grupoHabilidad -> new GrupoHabilidadDTO(
-                        grupoHabilidad.getId(),
-                        grupoHabilidad.getNombre(),
-                        grupoHabilidad.getHabilidades().stream()
-                            .map(sectorHabilidad -> new HabilidadDTO(
+                        grupoHabilidad.getIdGrupoHabilidad(),
+                        grupoHabilidad.getGrupoHabilidadNombre(),
+                        grupoHabilidad.getGrupoHabilidadHabilidad().stream()
+                                .map(sectorHabilidad -> new HabilidadDTO(
                                 sectorHabilidad.getHabilidad().getIdHabilidad(),
-                                sectorHabilidad.getHabilidad().getNombre(),
-                                null
-                            )).collect(Collectors.toSet()),
+                                sectorHabilidad.getHabilidad().getHabilidadNombre(),
+                                sectorHabilidad.getGrupoHabilidadValor()
+                        )).collect(Collectors.toSet()),
                         null
                 )).collect(Collectors.toSet())
-                
-        )).collect(Collectors.toSet());
+        )
+        ).collect(Collectors.toSet());
     }
 }

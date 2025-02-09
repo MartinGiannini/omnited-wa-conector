@@ -1,11 +1,12 @@
 package coop.bancocredicoop.omnited.entity;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.persistence.*;
-//HECHO
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "usuarios")
+@DynamicUpdate
 public class Usuario {
 
     @Id
@@ -15,64 +16,64 @@ public class Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_perfil")
-    private Perfil perfil;
+    private Perfil usuarioPerfil;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_condicion")
-    private Condicion condicion;
+    private Condicion usuarioCondicion;
 
-    @Column(nullable = false, length = 50)
-    private String nombre;
+    @Column(name = "usuario_nombre", nullable = false, length = 50)
+    private String usuarioNombre;
 
-    @Column(nullable = false, length = 30)
-    private String apellido;
+    @Column(name = "usuario_apellido", nullable = false, length = 30)
+    private String usuarioApellido;
 
-    @Column(nullable = false, length = 50)
-    private String usuario;
+    @Column(name = "usuario_usuario", nullable = false, length = 50)
+    private String usuarioUsuario;
 
-    @Column(nullable = false, length = 100)
-    private String correo;
+    @Column(name = "usuario_correo", nullable = false, length = 100)
+    private String usuarioCorreo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_extension")
-    private Extension extension;
+    private Extension usuarioExtension;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioHabilidad> usuarioHabilidades;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioHabilidad> usuarioHabilidad;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioEstado> usuarioEstados;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioEstado> usuarioEstado;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioPermisoAdministracion> permisosAdministracion;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioPermisoAdministracion> usuarioPermisoAdministracion;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioPermisoOperacion> permisosOperacion;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioPermisoOperacion> usuarioPermisoOperacion;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioPermisoSupervision> permisosSupervision;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioPermisoSupervision> usuarioPermisoSupervision;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioSector> usuarioSectores;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<UsuarioSector> usuarioSector;
 
     public Usuario() {
     }
 
     public Usuario(Long idUsuario, Perfil perfil, Condicion condicion, String nombre, String apellido, String usuario, String correo, Extension extension, Set<UsuarioHabilidad> usuarioHabilidades, Set<UsuarioEstado> usuarioEstados, Set<UsuarioPermisoAdministracion> permisosAdministracion, Set<UsuarioPermisoOperacion> permisosOperacion, Set<UsuarioPermisoSupervision> permisosSupervision, Set<UsuarioSector> usuarioSectores) {
         this.idUsuario = idUsuario;
-        this.perfil = perfil;
-        this.condicion = condicion;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.correo = correo;
-        this.extension = extension;
-        this.usuarioHabilidades = usuarioHabilidades;
-        this.usuarioEstados = usuarioEstados;
-        this.permisosAdministracion = permisosAdministracion;
-        this.permisosOperacion = permisosOperacion;
-        this.permisosSupervision = permisosSupervision;
-        this.usuarioSectores = usuarioSectores;
+        this.usuarioPerfil = perfil;
+        this.usuarioCondicion = condicion;
+        this.usuarioNombre = nombre;
+        this.usuarioApellido = apellido;
+        this.usuarioUsuario = usuario;
+        this.usuarioCorreo = correo;
+        this.usuarioExtension = extension;
+        this.usuarioHabilidad = usuarioHabilidades;
+        this.usuarioEstado = usuarioEstados;
+        this.usuarioPermisoAdministracion = permisosAdministracion;
+        this.usuarioPermisoOperacion = permisosOperacion;
+        this.usuarioPermisoSupervision = permisosSupervision;
+        this.usuarioSector = usuarioSectores;
     }
 
     public Long getIdUsuario() {
@@ -83,114 +84,128 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Perfil getUsuarioPerfil() {
+        return usuarioPerfil;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setUsuarioPerfil(Perfil usuarioPerfil) {
+        this.usuarioPerfil = usuarioPerfil;
     }
 
-    public Condicion getCondicion() {
-        return condicion;
+    public Condicion getUsuarioCondicion() {
+        return usuarioCondicion;
     }
 
-    public void setCondicion(Condicion condicion) {
-        this.condicion = condicion;
+    public void setUsuarioCondicion(Condicion usuarioCondicion) {
+        this.usuarioCondicion = usuarioCondicion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsuarioNombre() {
+        return usuarioNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuarioNombre(String nombre) {
+        this.usuarioNombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getUsuarioApellido() {
+        return usuarioApellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setUsuarioApellido(String apellido) {
+        this.usuarioApellido = apellido;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsuarioUsuario() {
+        return usuarioUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuarioUsuario(String usuario) {
+        this.usuarioUsuario = usuario;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getUsuarioCorreo() {
+        return usuarioCorreo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setUsuarioCorreo(String correo) {
+        this.usuarioCorreo = correo;
     }
 
-    public Extension getExtension() {
-        return extension;
+    public Extension getUsuarioExtension() {
+        return usuarioExtension;
     }
 
-    public void setExtension(Extension extension) {
-        this.extension = extension;
+    public void setUsuarioExtension(Extension usuarioExtension) {
+        this.usuarioExtension = usuarioExtension;
     }
 
-    public Set<UsuarioHabilidad> getUsuarioHabilidades() {
-        return usuarioHabilidades;
+    public Set<UsuarioHabilidad> getUsuarioHabilidad() {
+        return usuarioHabilidad;
     }
 
-    public void setUsuarioHabilidades(Set<UsuarioHabilidad> usuarioHabilidades) {
-        this.usuarioHabilidades = usuarioHabilidades;
+    public void setUsuarioHabilidad(Set<UsuarioHabilidad> usuarioHabilidades) {
+        this.usuarioHabilidad = usuarioHabilidades;
     }
 
-    public Set<UsuarioEstado> getUsuarioEstados() {
-        return usuarioEstados;
+    public Set<UsuarioEstado> getUsuarioEstado() {
+        return usuarioEstado;
     }
 
-    public void setUsuarioEstados(Set<UsuarioEstado> usuarioEstados) {
-        this.usuarioEstados = usuarioEstados;
+    public void setUsuarioEstado(Set<UsuarioEstado> usuarioEstados) {
+        this.usuarioEstado = usuarioEstados;
     }
 
-    public Set<UsuarioPermisoAdministracion> getPermisosAdministracion() {
-        return permisosAdministracion;
+    public Set<UsuarioPermisoAdministracion> getUsuarioPermisoAdministracion() {
+        return usuarioPermisoAdministracion;
     }
 
-    public void setPermisosAdministracion(Set<UsuarioPermisoAdministracion> permisosAdministracion) {
-        this.permisosAdministracion = permisosAdministracion;
+    public void setUsuarioPermisoAdministracion(Set<UsuarioPermisoAdministracion> permisosAdministracion) {
+        this.usuarioPermisoAdministracion = permisosAdministracion;
     }
 
-    public Set<UsuarioPermisoOperacion> getPermisosOperacion() {
-        return permisosOperacion;
+    public Set<UsuarioPermisoOperacion> getUsuarioPermisoOperacion() {
+        return usuarioPermisoOperacion;
     }
 
-    public void setPermisosOperacion(Set<UsuarioPermisoOperacion> permisosOperacion) {
-        this.permisosOperacion = permisosOperacion;
+    public void setUsuarioPermisoOperacion(Set<UsuarioPermisoOperacion> permisosOperacion) {
+        this.usuarioPermisoOperacion = permisosOperacion;
     }
 
-    public Set<UsuarioPermisoSupervision> getPermisosSupervision() {
-        return permisosSupervision;
+    public Set<UsuarioPermisoSupervision> getUsuarioPermisoSupervision() {
+        return usuarioPermisoSupervision;
     }
 
-    public void setPermisosSupervision(Set<UsuarioPermisoSupervision> permisosSupervision) {
-        this.permisosSupervision = permisosSupervision;
+    public void setUsuarioPermisoSupervision(Set<UsuarioPermisoSupervision> permisosSupervision) {
+        this.usuarioPermisoSupervision = permisosSupervision;
     }
 
-    public Set<Sector> getSectores() {
-        return usuarioSectores.stream()
-                              .map(UsuarioSector::getSector)
-                              .collect(Collectors.toSet());
+    // Getters y Setters para usuarioSector
+    public Set<UsuarioSector> getUsuarioSector() {
+        return usuarioSector;
     }
 
-    // Getters y Setters para usuarioSectores
-    public Set<UsuarioSector> getUsuarioSectores() {
-        return usuarioSectores;
+    public void setUsuarioSector(Set<UsuarioSector> usuarioSectores) {
+        this.usuarioSector = usuarioSectores;
+    }
+    
+    public void setHabilidades(Set<UsuarioHabilidad> nuevasHabilidades) {
+        this.usuarioHabilidad.clear();
+        this.usuarioHabilidad.addAll(nuevasHabilidades);
     }
 
-    public void setUsuarioSectores(Set<UsuarioSector> usuarioSectores) {
-        this.usuarioSectores = usuarioSectores;
+    public void setEstados(Set<UsuarioEstado> nuevosEstados) {
+        this.usuarioEstado.clear();
+        this.usuarioEstado.addAll(nuevosEstados);
+    }
+
+    public void setPermisosSupervision(Set<UsuarioPermisoSupervision> usuarioPermisoSupervision) {
+        this.usuarioPermisoSupervision.clear();
+        this.usuarioPermisoSupervision.addAll(usuarioPermisoSupervision);
+    }
+    
+    public void setPermisosOperacion(Set<UsuarioPermisoOperacion> usuarioPermisoOperacion) {
+        this.usuarioPermisoOperacion.clear();
+        this.usuarioPermisoOperacion.addAll(usuarioPermisoOperacion);
     }
 }

@@ -1,5 +1,6 @@
 package coop.bancocredicoop.omnited.entity;
 
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -12,35 +13,39 @@ public class Extension {
     private Long idExtension;
 
     @Column(name = "uri", length = 100, nullable = false)
-    private String uri;
+    private String extensionUri;
 
     @Column(name = "server", length = 100, nullable = false)
-    private String server;
+    private String extensionServer;
 
     @Column(name = "dominio", length = 100)
-    private String dominio;
+    private String extensionDominio;
 
     @Column(name = "username", length = 100)
-    private String username;
+    private String extensionUsername;
 
     @Column(name = "password", length = 100)
-    private String password;
+    private String extensionPassword;
 
     @ManyToOne
     @JoinColumn(name = "id_servidor", nullable = false)
-    private Servidor servidor;
+    private Servidor extensionServidor;
+    
+    @OneToMany(mappedBy = "usuarioExtension", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Usuario> usuario;
 
     public Extension() {
     }
 
-    public Extension(Long idExtension, String uri, String server, String dominio, String username, String password, Servidor servidor) {
+    public Extension(Long idExtension, String extensionUri, String extensionServer, String extensionDominio, String extensionUsername, String extensionPassword, Servidor extensionServidor, Set<Usuario> usuario) {
         this.idExtension = idExtension;
-        this.uri = uri;
-        this.server = server;
-        this.dominio = dominio;
-        this.username = username;
-        this.password = password;
-        this.servidor = servidor;
+        this.extensionUri = extensionUri;
+        this.extensionServer = extensionServer;
+        this.extensionDominio = extensionDominio;
+        this.extensionUsername = extensionUsername;
+        this.extensionPassword = extensionPassword;
+        this.extensionServidor = extensionServidor;
+        this.usuario = usuario;
     }
 
     public Long getIdExtension() {
@@ -51,53 +56,59 @@ public class Extension {
         this.idExtension = idExtension;
     }
 
-    public String getUri() {
-        return uri;
+    public String getExtensionUri() {
+        return extensionUri;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setExtensionUri(String extensionUri) {
+        this.extensionUri = extensionUri;
     }
 
-    public String getServer() {
-        return server;
+    public String getExtensionServer() {
+        return extensionServer;
     }
 
-    public void setServer(String server) {
-        this.server = server;
+    public void setExtensionServer(String extensionServer) {
+        this.extensionServer = extensionServer;
     }
 
-    public String getDominio() {
-        return dominio;
+    public String getExtensionDominio() {
+        return extensionDominio;
     }
 
-    public void setDominio(String dominio) {
-        this.dominio = dominio;
+    public void setExtensionDominio(String extensionDominio) {
+        this.extensionDominio = extensionDominio;
     }
 
-    public String getUsername() {
-        return username;
+    public String getExtensionUsername() {
+        return extensionUsername;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setExtensionUsername(String extensionUsername) {
+        this.extensionUsername = extensionUsername;
     }
 
-    public String getPassword() {
-        return password;
+    public String getExtensionPassword() {
+        return extensionPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setExtensionPassword(String extensionPassword) {
+        this.extensionPassword = extensionPassword;
     }
 
-    public Servidor getServidor() {
-        return servidor;
+    public Servidor getExtensionServidor() {
+        return extensionServidor;
     }
 
-    public void setServidor(Servidor servidor) {
-        this.servidor = servidor;
+    public void setExtensionServidor(Servidor extensionServidor) {
+        this.extensionServidor = extensionServidor;
     }
 
-    
+    public Set<Usuario> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Set<Usuario> usuario) {
+        this.usuario = usuario;
+    }
 }

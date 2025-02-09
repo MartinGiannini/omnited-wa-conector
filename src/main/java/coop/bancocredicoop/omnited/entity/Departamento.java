@@ -13,23 +13,23 @@ public class Departamento {
     private Long idDepartamento;
 
     @Column(name = "departamento_nombre", length = 50, nullable = false)
-    private String nombre;
+    private String departamentoNombre;
 
     @ManyToOne
     @JoinColumn(name = "id_gerencia", nullable = false)
     private Gerencia gerencia;
 
-    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Sector> sectores;
+    @OneToMany(mappedBy = "sectorDepartamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Sector> sector;
 
     public Departamento() {
     }
 
     public Departamento(Long idDepartamento, String nombre, Gerencia gerencia, Set<Sector> sectores) {
         this.idDepartamento = idDepartamento;
-        this.nombre = nombre;
+        this.departamentoNombre = nombre;
         this.gerencia = gerencia;
-        this.sectores = sectores;
+        this.sector = sectores;
     }
 
     public Long getIdDepartamento() {
@@ -40,12 +40,12 @@ public class Departamento {
         this.idDepartamento = idDepartamento;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDepartamentoNombre() {
+        return departamentoNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDepartamentoNombre(String nombre) {
+        this.departamentoNombre = nombre;
     }
 
     public Gerencia getGerencia() {
@@ -56,12 +56,12 @@ public class Departamento {
         this.gerencia = gerencia;
     }
 
-    public Set<Sector> getSectores() {
-        return sectores;
+    public Set<Sector> getSector() {
+        return sector;
     }
 
-    public void setSectores(Set<Sector> sectores) {
-        this.sectores = sectores;
+    public void setSector(Set<Sector> sectores) {
+        this.sector = sectores;
     }
 
     

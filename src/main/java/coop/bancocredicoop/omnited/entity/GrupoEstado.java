@@ -13,10 +13,10 @@ public class GrupoEstado {
     private Long idGrupoEstado;
 
     @Column(name = "grupo_estado_nombre")
-    private String nombre;
+    private String grupoEstadoNombre;
 
     @OneToMany(mappedBy = "grupoEstado", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GrupoEstadoEstado> estados;
+    private Set<GrupoEstadoEstado> grupoEstadoEstado;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sector", nullable = false)
@@ -27,8 +27,8 @@ public class GrupoEstado {
 
     public GrupoEstado(Long idGrupoEstado, String nombre, Set<GrupoEstadoEstado> estados, Sector sector) {
         this.idGrupoEstado = idGrupoEstado;
-        this.nombre = nombre;
-        this.estados = estados;
+        this.grupoEstadoNombre = nombre;
+        this.grupoEstadoEstado = estados;
         this.sector = sector;
     }
 
@@ -40,12 +40,12 @@ public class GrupoEstado {
         this.idGrupoEstado = idGrupoEstado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getGrupoEstadoNombre() {
+        return grupoEstadoNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setGrupoEstadoNombre(String nombre) {
+        this.grupoEstadoNombre = nombre;
     }
 
     public Sector getSector() {
@@ -56,11 +56,11 @@ public class GrupoEstado {
         this.sector = sector;
     }
 
-    public Set<GrupoEstadoEstado> getEstados() {
-        return estados;
+    public Set<GrupoEstadoEstado> getGrupoEstadoEstado() {
+        return grupoEstadoEstado;
     }
 
-    public void setEstados(Set<GrupoEstadoEstado> estados) {
-        this.estados = estados;
+    public void setGrupoEstadoEstado(Set<GrupoEstadoEstado> estados) {
+        this.grupoEstadoEstado = estados;
     }
 }

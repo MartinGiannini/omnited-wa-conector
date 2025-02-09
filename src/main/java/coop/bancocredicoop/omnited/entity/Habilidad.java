@@ -13,26 +13,26 @@ public class Habilidad {
     private Long idHabilidad;
 
     @Column(name = "habilidad_nombre", nullable = false, length = 100)
-    private String nombre;
+    private String habilidadNombre;
 
     @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioHabilidad> usuariosHabilidades;
+    private Set<UsuarioHabilidad> usuarioHabilidad;
 
     @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ColaHabilidad> colasHabilidades;
+    private Set<ColaHabilidad> colaHabilidad;
 
     @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GrupoHabilidadHabilidad> grupoHabilidades;
+    private Set<GrupoHabilidadHabilidad> grupoHabilidadHabilidad;
 
     public Habilidad() {
     }
 
     public Habilidad(Long idHabilidad, String nombre, Set<UsuarioHabilidad> usuariosHabilidades, Set<ColaHabilidad> colasHabilidades, Set<GrupoHabilidadHabilidad> grupoHabilidades) {
         this.idHabilidad = idHabilidad;
-        this.nombre = nombre;
-        this.usuariosHabilidades = usuariosHabilidades;
-        this.colasHabilidades = colasHabilidades;
-        this.grupoHabilidades = grupoHabilidades;
+        this.habilidadNombre = nombre;
+        this.usuarioHabilidad = usuariosHabilidades;
+        this.colaHabilidad = colasHabilidades;
+        this.grupoHabilidadHabilidad = grupoHabilidades;
     }
 
     public Long getIdHabilidad() {
@@ -43,36 +43,36 @@ public class Habilidad {
         this.idHabilidad = idHabilidad;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getHabilidadNombre() {
+        return habilidadNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setHabilidadNombre(String nombre) {
+        this.habilidadNombre = nombre;
     }
 
-    public Set<UsuarioHabilidad> getUsuariosHabilidades() {
-        return usuariosHabilidades;
+    public Set<UsuarioHabilidad> getUsuarioHabilidad() {
+        return usuarioHabilidad;
     }
 
-    public void setUsuariosHabilidades(Set<UsuarioHabilidad> usuariosHabilidades) {
-        this.usuariosHabilidades = usuariosHabilidades;
+    public void setUsuarioHabilidad(Set<UsuarioHabilidad> usuariosHabilidades) {
+        this.usuarioHabilidad = usuariosHabilidades;
     }
 
-    public Set<ColaHabilidad> getColasHabilidades() {
-        return colasHabilidades;
+    public Set<ColaHabilidad> getColaHabilidad() {
+        return colaHabilidad;
     }
 
-    public void setColasHabilidades(Set<ColaHabilidad> colasHabilidades) {
-        this.colasHabilidades = colasHabilidades;
+    public void setColaHabilidad(Set<ColaHabilidad> colasHabilidades) {
+        this.colaHabilidad = colasHabilidades;
     }
 
-    public Set<GrupoHabilidadHabilidad> getGrupoHabilidades() {
-        return grupoHabilidades;
+    public Set<GrupoHabilidadHabilidad> getGrupoHabilidadHabilidad() {
+        return grupoHabilidadHabilidad;
     }
 
-    public void setGrupoHabilidades(Set<GrupoHabilidadHabilidad> grupoHabilidades) {
-        this.grupoHabilidades = grupoHabilidades;
+    public void setGrupoHabilidadHabilidad(Set<GrupoHabilidadHabilidad> grupoHabilidades) {
+        this.grupoHabilidadHabilidad = grupoHabilidades;
     }
     
     

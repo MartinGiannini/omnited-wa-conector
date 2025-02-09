@@ -17,15 +17,15 @@ public class UsuarioPermisoAdministracion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_permiso_administracion", nullable = false)
-    private PermisoAdministracion permiso;
+    private PermisoAdministracion permisoAdministracion;
 
     public UsuarioPermisoAdministracion() {
     }
 
-    public UsuarioPermisoAdministracion(Long idUsuarioPermisoAdministracion, Usuario usuario, PermisoAdministracion permiso) {
+    public UsuarioPermisoAdministracion(Long idUsuarioPermisoAdministracion, Usuario usuario, PermisoAdministracion permisoAdministracion) {
         this.idUsuarioPermisoAdministracion = idUsuarioPermisoAdministracion;
         this.usuario = usuario;
-        this.permiso = permiso;
+        this.permisoAdministracion = permisoAdministracion;
     }
 
     public Long getIdUsuarioPermisoAdministracion() {
@@ -44,11 +44,11 @@ public class UsuarioPermisoAdministracion {
         this.usuario = usuario;
     }
 
-    public PermisoAdministracion getPermiso() {
-        return permiso;
+    public PermisoAdministracion getPermisoAdministracion() {
+        return permisoAdministracion;
     }
 
-    public void setPermiso(PermisoAdministracion permiso) {
-        this.permiso = permiso;
+    public void setPermisoAdministracion(PermisoAdministracion permisoAdministracion) {
+        this.permisoAdministracion = permisoAdministracion;
     }
 }

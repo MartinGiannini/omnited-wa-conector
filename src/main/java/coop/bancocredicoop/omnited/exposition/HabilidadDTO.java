@@ -1,39 +1,39 @@
 package coop.bancocredicoop.omnited.exposition;
 
 public class HabilidadDTO {
-    private Long id;
-    private String nombre;
-    private Long valor;
+    private Long idHabilidad;
+    private String habilidadNombre;
+    private Long habilidadValor;
 
-    public HabilidadDTO(Long id, String nombre, Long valor) {
-        this.id = id;
-        this.nombre = nombre;
-        this.valor = valor;
+    public HabilidadDTO(Long idHabilidad, String nombreHabilidad, Long valorHabilidad) {
+        this.idHabilidad = idHabilidad;
+        this.habilidadNombre = nombreHabilidad;
+        this.habilidadValor = valorHabilidad;
     }
 
     public HabilidadDTO() {}
 
-    public Long getId() {
-        return id;
+    public Long getIdHabilidad() {
+        return idHabilidad;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdHabilidad(Long id) {
+        this.idHabilidad = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getHabilidadNombre() {
+        return habilidadNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setHabilidadNombre(String nombre) {
+        this.habilidadNombre = nombre;
     }
 
-    public Long getValor() {
-        return valor;
+    public Long getHabilidadValor() {
+        return habilidadValor;
     }
 
-    public void setValor(Long valor) {
-        this.valor = valor;
+    public void setHabilidadValor(Long valor) {
+        this.habilidadValor = valor;
     }
 }

@@ -13,43 +13,43 @@ public class Sector {
     private Long idSector;
 
     @Column(name = "sector_nombre", nullable = false, length = 50)
-    private String nombre;
+    private String sectorNombre;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_departamento", nullable = false)
-    private Departamento departamento;
+    private Departamento sectorDepartamento;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioSector> usuarios;
+    private Set<UsuarioSector> usuarioSector;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SectorEstado> estados;
+    private Set<SectorEstado> sectorEstado;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SectorHabilidad> habilidades;
+    private Set<SectorHabilidad> sectorHabilidad;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GrupoEstado> gruposEstado;
+    private Set<GrupoEstado> grupoEstado;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GrupoHabilidad> gruposHabilidad;
+    private Set<GrupoHabilidad> grupoHabilidad;
 
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Cola> colas; // Relación directa con Colas
+    private Set<Cola> cola; // Relación directa con Colas
 
     public Sector() {
     }
 
-    public Sector(Long idSector, String nombre, Departamento departamento, Set<UsuarioSector> usuarios, Set<SectorEstado> estados, Set<SectorHabilidad> habilidades, Set<GrupoEstado> gruposEstado, Set<GrupoHabilidad> gruposHabilidad, Set<Cola> colas) {
+    public Sector(Long idSector, String nombre, Departamento sectorDepartamento, Set<UsuarioSector> usuarios, Set<SectorEstado> estados, Set<SectorHabilidad> habilidades, Set<GrupoEstado> gruposEstado, Set<GrupoHabilidad> gruposHabilidad, Set<Cola> colas) {
         this.idSector = idSector;
-        this.nombre = nombre;
-        this.departamento = departamento;
-        this.usuarios = usuarios;
-        this.estados = estados;
-        this.habilidades = habilidades;
-        this.gruposEstado = gruposEstado;
-        this.gruposHabilidad = gruposHabilidad;
-        this.colas = colas;
+        this.sectorNombre = nombre;
+        this.sectorDepartamento = sectorDepartamento;
+        this.usuarioSector = usuarios;
+        this.sectorEstado = estados;
+        this.sectorHabilidad = habilidades;
+        this.grupoEstado = gruposEstado;
+        this.grupoHabilidad = gruposHabilidad;
+        this.cola = colas;
     }
 
     public Long getIdSector() {
@@ -60,68 +60,68 @@ public class Sector {
         this.idSector = idSector;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getSectorNombre() {
+        return sectorNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setSectorNombre(String nombre) {
+        this.sectorNombre = nombre;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public Departamento getSectorDepartamento() {
+        return sectorDepartamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setSectorDepartamento(Departamento sectorDepartamento) {
+        this.sectorDepartamento = sectorDepartamento;
     }
 
-    public Set<UsuarioSector> getUsuarios() {
-        return usuarios;
+    public Set<UsuarioSector> getUsuarioSector() {
+        return usuarioSector;
     }
 
-    public void setUsuarios(Set<UsuarioSector> usuarios) {
-        this.usuarios = usuarios;
+    public void setUsuarioSector(Set<UsuarioSector> usuarios) {
+        this.usuarioSector = usuarios;
     }
 
-    public Set<SectorEstado> getEstados() {
-        return estados;
+    public Set<SectorEstado> getSectorEstado() {
+        return sectorEstado;
     }
 
-    public void setEstados(Set<SectorEstado> estados) {
-        this.estados = estados;
+    public void setSectorEstado(Set<SectorEstado> estados) {
+        this.sectorEstado = estados;
     }
 
-    public Set<SectorHabilidad> getHabilidades() {
-        return habilidades;
+    public Set<SectorHabilidad> getSectorHabilidad() {
+        return sectorHabilidad;
     }
 
-    public void setHabilidades(Set<SectorHabilidad> habilidades) {
-        this.habilidades = habilidades;
+    public void setSectorHabilidad(Set<SectorHabilidad> habilidades) {
+        this.sectorHabilidad = habilidades;
     }
 
-    public Set<GrupoEstado> getGruposEstado() {
-        return gruposEstado;
+    public Set<GrupoEstado> getGrupoEstado() {
+        return grupoEstado;
     }
 
-    public void setGruposEstado(Set<GrupoEstado> gruposEstado) {
-        this.gruposEstado = gruposEstado;
+    public void setGrupoEstado(Set<GrupoEstado> gruposEstado) {
+        this.grupoEstado = gruposEstado;
     }
 
-    public Set<GrupoHabilidad> getGruposHabilidad() {
-        return gruposHabilidad;
+    public Set<GrupoHabilidad> getGrupoHabilidad() {
+        return grupoHabilidad;
     }
 
-    public void setGruposHabilidad(Set<GrupoHabilidad> gruposHabilidad) {
-        this.gruposHabilidad = gruposHabilidad;
+    public void setGrupoHabilidad(Set<GrupoHabilidad> gruposHabilidad) {
+        this.grupoHabilidad = gruposHabilidad;
     }
 
-    public Set<Cola> getColas() {
-        return colas;
+    public Set<Cola> getCola() {
+        return cola;
     }
 
-    public void setColas(Set<Cola> colas) {
-        this.colas = colas;
+    public void setCola(Set<Cola> colas) {
+        this.cola = colas;
     }
     
     

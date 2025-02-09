@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface SectorRepository extends JpaRepository<Sector, Long> {
 
     @Query("SELECT s FROM Sector s "
-            + "LEFT JOIN FETCH s.estados e "
-            + "LEFT JOIN FETCH s.habilidades h "
-            + "LEFT JOIN FETCH s.gruposEstado ge "
-            + "LEFT JOIN FETCH s.gruposHabilidad gh "
+            + "LEFT JOIN FETCH s.sectorEstado e "
+            + "LEFT JOIN FETCH s.sectorHabilidad h "
+            + "LEFT JOIN FETCH s.grupoEstado ge "
+            + "LEFT JOIN FETCH s.grupoHabilidad gh "
             + "WHERE s.idSector IN :sectorIds")
     Set<Sector> findByIdInWithDetails(Set<Long> sectorIds);
 }

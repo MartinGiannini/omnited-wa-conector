@@ -20,7 +20,7 @@ public class UsuarioHabilidad {
     private Habilidad habilidad;
 
     @Column(name = "usuario_habilidad_valor", nullable = false)
-    private Long valor;
+    private Long usuarioHabilidadValor;
 
     public UsuarioHabilidad() {
     }
@@ -29,7 +29,7 @@ public class UsuarioHabilidad {
         this.idUsuarioHabilidad = idUsuarioHabilidad;
         this.usuario = usuario;
         this.habilidad = habilidad;
-        this.valor = valor;
+        this.usuarioHabilidadValor = valor;
     }
 
     public Long getIdUsuarioHabilidad() {
@@ -56,12 +56,12 @@ public class UsuarioHabilidad {
         this.habilidad = habilidad;
     }
 
-    public Long getValor() {
-        return valor;
+    public Long getUsuarioHabilidadValor() {
+        return usuarioHabilidadValor;
     }
 
-    public void setValor(Long valor) {
-        this.valor = valor;
+    public void setUsuarioHabilidadValor(Long valor) {
+        this.usuarioHabilidadValor = valor;
     }
     
     

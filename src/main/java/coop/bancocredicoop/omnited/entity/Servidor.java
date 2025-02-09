@@ -13,22 +13,22 @@ public class Servidor {
     private Long idServidor;
 
     @Column(name = "servidor_nombre", length = 100, nullable = false)
-    private String nombre;
+    private String servidorNombre;
 
     @Column(name = "servidor_puerto", nullable = false)
-    private Long puerto;
+    private Long servidorPuerto;
 
-    @OneToMany(mappedBy = "servidor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Extension> extensiones;
+    @OneToMany(mappedBy = "extensionServidor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Extension> extension;
 
     public Servidor() {
     }
 
     public Servidor(Long idServidor, String nombre, Long puerto, Set<Extension> extensiones) {
         this.idServidor = idServidor;
-        this.nombre = nombre;
-        this.puerto = puerto;
-        this.extensiones = extensiones;
+        this.servidorNombre = nombre;
+        this.servidorPuerto = puerto;
+        this.extension = extensiones;
     }
 
     public Long getIdServidor() {
@@ -39,28 +39,28 @@ public class Servidor {
         this.idServidor = idServidor;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getServidorNombre() {
+        return servidorNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setServidorNombre(String nombre) {
+        this.servidorNombre = nombre;
     }
 
-    public Long getPuerto() {
-        return puerto;
+    public Long getServidorPuerto() {
+        return servidorPuerto;
     }
 
-    public void setPuerto(Long puerto) {
-        this.puerto = puerto;
+    public void setServidorPuerto(Long puerto) {
+        this.servidorPuerto = puerto;
     }
 
-    public Set<Extension> getExtensiones() {
-        return extensiones;
+    public Set<Extension> getExtension() {
+        return extension;
     }
 
-    public void setExtensiones(Set<Extension> extensiones) {
-        this.extensiones = extensiones;
+    public void setExtension(Set<Extension> extensiones) {
+        this.extension = extensiones;
     }
 
     

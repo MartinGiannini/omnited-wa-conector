@@ -2,9 +2,11 @@ package coop.bancocredicoop.omnited.entity;
 
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "colas")
+@DynamicUpdate
 public class Cola {
 
     @Id
@@ -17,52 +19,44 @@ public class Cola {
     private Estrategia estrategia;
 
     @Column(name = "cola_nombre", length = 100, nullable = false)
-    private String nombre;
+    private String colaNombre;
 
     @Column(name = "cola_ringueo", nullable = false)
-    private Long ringueo;
+    private Long colaRingueo;
 
     @Column(name = "cola_espera", nullable = false)
-    private Long espera;
+    private Long colaEspera;
 
     @Column(name = "cola_autopausa", nullable = false)
-    private Long autoPausa;
+    private Long colaAutoPausa;
 
-    @Column(name = "cola_desborde", length = 100)
-    private String desborde;
+    @Column(name = "cola_desborde")
+    private Long colaDesborde;
 
     @Column(name = "cola_prioridad", nullable = false)
-    private Short prioridad;
+    private Long colaPrioridad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sector", nullable = false)
     private Sector sector; // Relación directa con Sector
 
-    @OneToMany(mappedBy = "cola", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ColaHabilidad> habilidades;
+    @OneToMany(mappedBy = "cola", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ColaHabilidad> colaHabilidad;
 
     public Cola() {
     }
 
-    public Cola(Long idCola, Estrategia estrategia, String nombre, Long ringueo, Long espera, Long autoPausa, String desborde, Short prioridad, Sector sector, Set<ColaHabilidad> habilidades) {
+    public Cola(Long idCola, Estrategia estrategia, String nombreCola, Long ringueo, Long espera, Long autoPausa, Long desborde, Long prioridad, Sector sector, Set<ColaHabilidad> habilidades) {
         this.idCola = idCola;
         this.estrategia = estrategia;
-        this.nombre = nombre;
-        this.ringueo = ringueo;
-        this.espera = espera;
-        this.autoPausa = autoPausa;
-        this.desborde = desborde;
-        this.prioridad = prioridad;
+        this.colaNombre = nombreCola;
+        this.colaRingueo = ringueo;
+        this.colaEspera = espera;
+        this.colaAutoPausa = autoPausa;
+        this.colaDesborde = desborde;
+        this.colaPrioridad = prioridad;
         this.sector = sector;
-        this.habilidades = habilidades;
-    }
-
-    public Estrategia getEstrategia() {
-        return estrategia;
-    }
-
-    public void setEstrategia(Estrategia estrategia) {
-        this.estrategia = estrategia;
+        this.colaHabilidad = habilidades;
     }
 
     public Long getIdCola() {
@@ -73,54 +67,60 @@ public class Cola {
         this.idCola = idCola;
     }
 
+    public Estrategia getEstrategia() {
+        return estrategia;
+    }
+
+    public void setEstrategia(Estrategia estrategia) {
+        this.estrategia = estrategia;
+    }
     
-
-    public String getNombre() {
-        return nombre;
+    public String getColaNombre() {
+        return colaNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setColaNombre(String nombre) {
+        this.colaNombre = nombre;
     }
 
-    public Long getRingueo() {
-        return ringueo;
+    public Long getColaRingueo() {
+        return colaRingueo;
     }
 
-    public void setRingueo(Long ringueo) {
-        this.ringueo = ringueo;
+    public void setColaRingueo(Long ringueo) {
+        this.colaRingueo = ringueo;
     }
 
-    public Long getEspera() {
-        return espera;
+    public Long getColaEspera() {
+        return colaEspera;
     }
 
-    public void setEspera(Long espera) {
-        this.espera = espera;
+    public void setColaEspera(Long espera) {
+        this.colaEspera = espera;
     }
 
-    public Long getAutoPausa() {
-        return autoPausa;
+    public Long getColaAutoPausa() {
+        return colaAutoPausa;
     }
 
-    public void setAutoPausa(Long autoPausa) {
-        this.autoPausa = autoPausa;
+    public void setColaAutoPausa(Long autoPausa) {
+        this.colaAutoPausa = autoPausa;
     }
 
-    public String getDesborde() {
-        return desborde;
+    public Long getColaDesborde() {
+        return colaDesborde;
     }
 
-    public void setDesborde(String desborde) {
-        this.desborde = desborde;
+    public void setColaDesborde(Long desborde) {
+        this.colaDesborde = desborde;
     }
 
-    public Short getPrioridad() {
-        return prioridad;
+    public Long getColaPrioridad() {
+        return colaPrioridad;
     }
 
-    public void setPrioridad(Short prioridad) {
-        this.prioridad = prioridad;
+    public void setColaPrioridad(Long prioridad) {
+        this.colaPrioridad = prioridad;
     }
 
     public Sector getSector() {
@@ -131,11 +131,13 @@ public class Cola {
         this.sector = sector;
     }
 
-    public Set<ColaHabilidad> getHabilidades() {
-        return habilidades;
+    public Set<ColaHabilidad> getColaHabilidad() {
+        return colaHabilidad;
     }
 
-    public void setHabilidades(Set<ColaHabilidad> habilidades) {
-        this.habilidades = habilidades;
+    // Método para actualizar habilidades sin eliminar manualmente
+    public void setColaHabilidad(Set<ColaHabilidad> nuevasHabilidades) {
+        this.colaHabilidad.clear();  // Hibernate detecta los cambios y elimina las antiguas
+        this.colaHabilidad.addAll(nuevasHabilidades);
     }
 }
