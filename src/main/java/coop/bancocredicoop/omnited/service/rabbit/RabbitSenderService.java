@@ -30,22 +30,4 @@ public class RabbitSenderService {
         rabbitTemplate.convertAndSend(exchangeName, routingKeyOut, message);
     }
 
-    public static class Recipient {
-
-        private final String recipientId;
-        private final String recipientInfo;
-
-        public Recipient(String recipientId, String recipientInfo) {
-            this.recipientId = recipientId;
-            this.recipientInfo = recipientInfo;
-        }
-
-        public String getRecipientId() {
-            return recipientId;
-        }
-
-        public String getRecipientInfo() {
-            return recipientInfo;
-        }
-    }
 }

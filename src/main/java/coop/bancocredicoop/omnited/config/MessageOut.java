@@ -25,80 +25,70 @@ public final class MessageOut {
      * Un campo de tipo string con el identificador único
      * </pre>
      *
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>string idMensaje = 1;</code>
+     * @return The idMensaje.
      */
-    java.lang.String getId();
+    java.lang.String getIdMensaje();
     /**
      * <pre>
      * Un campo de tipo string con el identificador único
      * </pre>
      *
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>string idMensaje = 1;</code>
+     * @return The bytes for idMensaje.
      */
     com.google.protobuf.ByteString
-        getIdBytes();
+        getIdMensajeBytes();
 
     /**
      * <pre>
      * Tipo de mensaje
      * </pre>
      *
-     * <code>string type = 2;</code>
-     * @return The type.
+     * <code>string mensajeType = 2;</code>
+     * @return The mensajeType.
      */
-    java.lang.String getType();
+    java.lang.String getMensajeType();
     /**
      * <pre>
      * Tipo de mensaje
      * </pre>
      *
-     * <code>string type = 2;</code>
-     * @return The bytes for type.
+     * <code>string mensajeType = 2;</code>
+     * @return The bytes for mensajeType.
      */
     com.google.protobuf.ByteString
-        getTypeBytes();
+        getMensajeTypeBytes();
 
     /**
      * <pre>
      * JSON serializado como string
      * </pre>
      *
-     * <code>string jsonPayload = 3;</code>
-     * @return The jsonPayload.
+     * <code>string mensajeJson = 3;</code>
+     * @return The mensajeJson.
      */
-    java.lang.String getJsonPayload();
+    java.lang.String getMensajeJson();
     /**
      * <pre>
      * JSON serializado como string
      * </pre>
      *
-     * <code>string jsonPayload = 3;</code>
-     * @return The bytes for jsonPayload.
+     * <code>string mensajeJson = 3;</code>
+     * @return The bytes for mensajeJson.
      */
     com.google.protobuf.ByteString
-        getJsonPayloadBytes();
+        getMensajeJsonBytes();
 
     /**
      * <pre>
-     * Lista de destinatarios
+     * Si es necesario se setea el idSector para definir destinatarios
      * </pre>
      *
-     * <code>string recipients = 4;</code>
-     * @return The recipients.
+     * <code>int32 idSector = 4;</code>
+     * @return The idSector.
      */
-    java.lang.String getRecipients();
-    /**
-     * <pre>
-     * Lista de destinatarios
-     * </pre>
-     *
-     * <code>string recipients = 4;</code>
-     * @return The bytes for recipients.
-     */
-    com.google.protobuf.ByteString
-        getRecipientsBytes();
+    int getIdSector();
   }
   /**
    * <pre>
@@ -117,10 +107,9 @@ public final class MessageOut {
       super(builder);
     }
     private MensajeJSON() {
-      id_ = "";
-      type_ = "";
-      jsonPayload_ = "";
-      recipients_ = "";
+      idMensaje_ = "";
+      mensajeType_ = "";
+      mensajeJson_ = "";
     }
 
     @java.lang.Override
@@ -148,27 +137,27 @@ public final class MessageOut {
               coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON.class, coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
+    public static final int IDMENSAJE_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object id_ = "";
+    private volatile java.lang.Object idMensaje_ = "";
     /**
      * <pre>
      * Un campo de tipo string con el identificador único
      * </pre>
      *
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>string idMensaje = 1;</code>
+     * @return The idMensaje.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
+    public java.lang.String getIdMensaje() {
+      java.lang.Object ref = idMensaje_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        id_ = s;
+        idMensaje_ = s;
         return s;
       }
     }
@@ -177,45 +166,45 @@ public final class MessageOut {
      * Un campo de tipo string con el identificador único
      * </pre>
      *
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>string idMensaje = 1;</code>
+     * @return The bytes for idMensaje.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
+        getIdMensajeBytes() {
+      java.lang.Object ref = idMensaje_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        id_ = b;
+        idMensaje_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int TYPE_FIELD_NUMBER = 2;
+    public static final int MENSAJETYPE_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object type_ = "";
+    private volatile java.lang.Object mensajeType_ = "";
     /**
      * <pre>
      * Tipo de mensaje
      * </pre>
      *
-     * <code>string type = 2;</code>
-     * @return The type.
+     * <code>string mensajeType = 2;</code>
+     * @return The mensajeType.
      */
     @java.lang.Override
-    public java.lang.String getType() {
-      java.lang.Object ref = type_;
+    public java.lang.String getMensajeType() {
+      java.lang.Object ref = mensajeType_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        type_ = s;
+        mensajeType_ = s;
         return s;
       }
     }
@@ -224,45 +213,45 @@ public final class MessageOut {
      * Tipo de mensaje
      * </pre>
      *
-     * <code>string type = 2;</code>
-     * @return The bytes for type.
+     * <code>string mensajeType = 2;</code>
+     * @return The bytes for mensajeType.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getTypeBytes() {
-      java.lang.Object ref = type_;
+        getMensajeTypeBytes() {
+      java.lang.Object ref = mensajeType_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        type_ = b;
+        mensajeType_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int JSONPAYLOAD_FIELD_NUMBER = 3;
+    public static final int MENSAJEJSON_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object jsonPayload_ = "";
+    private volatile java.lang.Object mensajeJson_ = "";
     /**
      * <pre>
      * JSON serializado como string
      * </pre>
      *
-     * <code>string jsonPayload = 3;</code>
-     * @return The jsonPayload.
+     * <code>string mensajeJson = 3;</code>
+     * @return The mensajeJson.
      */
     @java.lang.Override
-    public java.lang.String getJsonPayload() {
-      java.lang.Object ref = jsonPayload_;
+    public java.lang.String getMensajeJson() {
+      java.lang.Object ref = mensajeJson_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        jsonPayload_ = s;
+        mensajeJson_ = s;
         return s;
       }
     }
@@ -271,69 +260,37 @@ public final class MessageOut {
      * JSON serializado como string
      * </pre>
      *
-     * <code>string jsonPayload = 3;</code>
-     * @return The bytes for jsonPayload.
+     * <code>string mensajeJson = 3;</code>
+     * @return The bytes for mensajeJson.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getJsonPayloadBytes() {
-      java.lang.Object ref = jsonPayload_;
+        getMensajeJsonBytes() {
+      java.lang.Object ref = mensajeJson_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        jsonPayload_ = b;
+        mensajeJson_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int RECIPIENTS_FIELD_NUMBER = 4;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object recipients_ = "";
+    public static final int IDSECTOR_FIELD_NUMBER = 4;
+    private int idSector_ = 0;
     /**
      * <pre>
-     * Lista de destinatarios
+     * Si es necesario se setea el idSector para definir destinatarios
      * </pre>
      *
-     * <code>string recipients = 4;</code>
-     * @return The recipients.
+     * <code>int32 idSector = 4;</code>
+     * @return The idSector.
      */
     @java.lang.Override
-    public java.lang.String getRecipients() {
-      java.lang.Object ref = recipients_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        recipients_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Lista de destinatarios
-     * </pre>
-     *
-     * <code>string recipients = 4;</code>
-     * @return The bytes for recipients.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getRecipientsBytes() {
-      java.lang.Object ref = recipients_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        recipients_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getIdSector() {
+      return idSector_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -350,17 +307,17 @@ public final class MessageOut {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idMensaje_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idMensaje_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, type_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mensajeType_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, mensajeType_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(jsonPayload_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, jsonPayload_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mensajeJson_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, mensajeJson_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(recipients_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, recipients_);
+      if (idSector_ != 0) {
+        output.writeInt32(4, idSector_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -371,17 +328,18 @@ public final class MessageOut {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idMensaje_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idMensaje_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, type_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mensajeType_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, mensajeType_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(jsonPayload_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, jsonPayload_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mensajeJson_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, mensajeJson_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(recipients_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, recipients_);
+      if (idSector_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, idSector_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -398,14 +356,14 @@ public final class MessageOut {
       }
       coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON other = (coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
-      if (!getType()
-          .equals(other.getType())) return false;
-      if (!getJsonPayload()
-          .equals(other.getJsonPayload())) return false;
-      if (!getRecipients()
-          .equals(other.getRecipients())) return false;
+      if (!getIdMensaje()
+          .equals(other.getIdMensaje())) return false;
+      if (!getMensajeType()
+          .equals(other.getMensajeType())) return false;
+      if (!getMensajeJson()
+          .equals(other.getMensajeJson())) return false;
+      if (getIdSector()
+          != other.getIdSector()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -417,14 +375,14 @@ public final class MessageOut {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getType().hashCode();
-      hash = (37 * hash) + JSONPAYLOAD_FIELD_NUMBER;
-      hash = (53 * hash) + getJsonPayload().hashCode();
-      hash = (37 * hash) + RECIPIENTS_FIELD_NUMBER;
-      hash = (53 * hash) + getRecipients().hashCode();
+      hash = (37 * hash) + IDMENSAJE_FIELD_NUMBER;
+      hash = (53 * hash) + getIdMensaje().hashCode();
+      hash = (37 * hash) + MENSAJETYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getMensajeType().hashCode();
+      hash = (37 * hash) + MENSAJEJSON_FIELD_NUMBER;
+      hash = (53 * hash) + getMensajeJson().hashCode();
+      hash = (37 * hash) + IDSECTOR_FIELD_NUMBER;
+      hash = (53 * hash) + getIdSector();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -558,10 +516,10 @@ public final class MessageOut {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        id_ = "";
-        type_ = "";
-        jsonPayload_ = "";
-        recipients_ = "";
+        idMensaje_ = "";
+        mensajeType_ = "";
+        mensajeJson_ = "";
+        idSector_ = 0;
         return this;
       }
 
@@ -596,16 +554,16 @@ public final class MessageOut {
       private void buildPartial0(coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.id_ = id_;
+          result.idMensaje_ = idMensaje_;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.type_ = type_;
+          result.mensajeType_ = mensajeType_;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.jsonPayload_ = jsonPayload_;
+          result.mensajeJson_ = mensajeJson_;
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.recipients_ = recipients_;
+          result.idSector_ = idSector_;
         }
       }
 
@@ -653,25 +611,23 @@ public final class MessageOut {
 
       public Builder mergeFrom(coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON other) {
         if (other == coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
+        if (!other.getIdMensaje().isEmpty()) {
+          idMensaje_ = other.idMensaje_;
           bitField0_ |= 0x00000001;
           onChanged();
         }
-        if (!other.getType().isEmpty()) {
-          type_ = other.type_;
+        if (!other.getMensajeType().isEmpty()) {
+          mensajeType_ = other.mensajeType_;
           bitField0_ |= 0x00000002;
           onChanged();
         }
-        if (!other.getJsonPayload().isEmpty()) {
-          jsonPayload_ = other.jsonPayload_;
+        if (!other.getMensajeJson().isEmpty()) {
+          mensajeJson_ = other.mensajeJson_;
           bitField0_ |= 0x00000004;
           onChanged();
         }
-        if (!other.getRecipients().isEmpty()) {
-          recipients_ = other.recipients_;
-          bitField0_ |= 0x00000008;
-          onChanged();
+        if (other.getIdSector() != 0) {
+          setIdSector(other.getIdSector());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -700,31 +656,29 @@ public final class MessageOut {
                 done = true;
                 break;
               case 10: {
-                id_ = input.readStringRequireUtf8();
+                idMensaje_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
-                type_ = input.readStringRequireUtf8();
+                mensajeType_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
               case 26: {
-                jsonPayload_ = input.readStringRequireUtf8();
+                mensajeJson_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000004;
                 break;
               } // case 26
-              case 34: {
-                recipients_ = input.readStringRequireUtf8();
+              case 32: {
+                idSector_ = input.readInt32();
                 bitField0_ |= 0x00000008;
                 break;
-              } // case 34
+              } // case 32
               default: {
-                  /*
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                //if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
-                }
-                  */
+                //}
                 break;
               } // default:
             } // switch (tag)
@@ -738,22 +692,22 @@ public final class MessageOut {
       }
       private int bitField0_;
 
-      private java.lang.Object id_ = "";
+      private java.lang.Object idMensaje_ = "";
       /**
        * <pre>
        * Un campo de tipo string con el identificador único
        * </pre>
        *
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>string idMensaje = 1;</code>
+       * @return The idMensaje.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
+      public java.lang.String getIdMensaje() {
+        java.lang.Object ref = idMensaje_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          id_ = s;
+          idMensaje_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -764,17 +718,17 @@ public final class MessageOut {
        * Un campo de tipo string con el identificador único
        * </pre>
        *
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>string idMensaje = 1;</code>
+       * @return The bytes for idMensaje.
        */
       public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
+          getIdMensajeBytes() {
+        java.lang.Object ref = idMensaje_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          id_ = b;
+          idMensaje_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -785,14 +739,14 @@ public final class MessageOut {
        * Un campo de tipo string con el identificador único
        * </pre>
        *
-       * <code>string id = 1;</code>
-       * @param value The id to set.
+       * <code>string idMensaje = 1;</code>
+       * @param value The idMensaje to set.
        * @return This builder for chaining.
        */
-      public Builder setId(
+      public Builder setIdMensaje(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        id_ = value;
+        idMensaje_ = value;
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
@@ -802,11 +756,11 @@ public final class MessageOut {
        * Un campo de tipo string con el identificador único
        * </pre>
        *
-       * <code>string id = 1;</code>
+       * <code>string idMensaje = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearId() {
-        id_ = getDefaultInstance().getId();
+      public Builder clearIdMensaje() {
+        idMensaje_ = getDefaultInstance().getIdMensaje();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
@@ -816,36 +770,36 @@ public final class MessageOut {
        * Un campo de tipo string con el identificador único
        * </pre>
        *
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
+       * <code>string idMensaje = 1;</code>
+       * @param value The bytes for idMensaje to set.
        * @return This builder for chaining.
        */
-      public Builder setIdBytes(
+      public Builder setIdMensajeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        id_ = value;
+        idMensaje_ = value;
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object type_ = "";
+      private java.lang.Object mensajeType_ = "";
       /**
        * <pre>
        * Tipo de mensaje
        * </pre>
        *
-       * <code>string type = 2;</code>
-       * @return The type.
+       * <code>string mensajeType = 2;</code>
+       * @return The mensajeType.
        */
-      public java.lang.String getType() {
-        java.lang.Object ref = type_;
+      public java.lang.String getMensajeType() {
+        java.lang.Object ref = mensajeType_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          type_ = s;
+          mensajeType_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -856,17 +810,17 @@ public final class MessageOut {
        * Tipo de mensaje
        * </pre>
        *
-       * <code>string type = 2;</code>
-       * @return The bytes for type.
+       * <code>string mensajeType = 2;</code>
+       * @return The bytes for mensajeType.
        */
       public com.google.protobuf.ByteString
-          getTypeBytes() {
-        java.lang.Object ref = type_;
+          getMensajeTypeBytes() {
+        java.lang.Object ref = mensajeType_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          type_ = b;
+          mensajeType_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -877,14 +831,14 @@ public final class MessageOut {
        * Tipo de mensaje
        * </pre>
        *
-       * <code>string type = 2;</code>
-       * @param value The type to set.
+       * <code>string mensajeType = 2;</code>
+       * @param value The mensajeType to set.
        * @return This builder for chaining.
        */
-      public Builder setType(
+      public Builder setMensajeType(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        type_ = value;
+        mensajeType_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
@@ -894,11 +848,11 @@ public final class MessageOut {
        * Tipo de mensaje
        * </pre>
        *
-       * <code>string type = 2;</code>
+       * <code>string mensajeType = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearType() {
-        type_ = getDefaultInstance().getType();
+      public Builder clearMensajeType() {
+        mensajeType_ = getDefaultInstance().getMensajeType();
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
@@ -908,36 +862,36 @@ public final class MessageOut {
        * Tipo de mensaje
        * </pre>
        *
-       * <code>string type = 2;</code>
-       * @param value The bytes for type to set.
+       * <code>string mensajeType = 2;</code>
+       * @param value The bytes for mensajeType to set.
        * @return This builder for chaining.
        */
-      public Builder setTypeBytes(
+      public Builder setMensajeTypeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        type_ = value;
+        mensajeType_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
 
-      private java.lang.Object jsonPayload_ = "";
+      private java.lang.Object mensajeJson_ = "";
       /**
        * <pre>
        * JSON serializado como string
        * </pre>
        *
-       * <code>string jsonPayload = 3;</code>
-       * @return The jsonPayload.
+       * <code>string mensajeJson = 3;</code>
+       * @return The mensajeJson.
        */
-      public java.lang.String getJsonPayload() {
-        java.lang.Object ref = jsonPayload_;
+      public java.lang.String getMensajeJson() {
+        java.lang.Object ref = mensajeJson_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          jsonPayload_ = s;
+          mensajeJson_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -948,17 +902,17 @@ public final class MessageOut {
        * JSON serializado como string
        * </pre>
        *
-       * <code>string jsonPayload = 3;</code>
-       * @return The bytes for jsonPayload.
+       * <code>string mensajeJson = 3;</code>
+       * @return The bytes for mensajeJson.
        */
       public com.google.protobuf.ByteString
-          getJsonPayloadBytes() {
-        java.lang.Object ref = jsonPayload_;
+          getMensajeJsonBytes() {
+        java.lang.Object ref = mensajeJson_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          jsonPayload_ = b;
+          mensajeJson_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -969,14 +923,14 @@ public final class MessageOut {
        * JSON serializado como string
        * </pre>
        *
-       * <code>string jsonPayload = 3;</code>
-       * @param value The jsonPayload to set.
+       * <code>string mensajeJson = 3;</code>
+       * @param value The mensajeJson to set.
        * @return This builder for chaining.
        */
-      public Builder setJsonPayload(
+      public Builder setMensajeJson(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        jsonPayload_ = value;
+        mensajeJson_ = value;
         bitField0_ |= 0x00000004;
         onChanged();
         return this;
@@ -986,11 +940,11 @@ public final class MessageOut {
        * JSON serializado como string
        * </pre>
        *
-       * <code>string jsonPayload = 3;</code>
+       * <code>string mensajeJson = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearJsonPayload() {
-        jsonPayload_ = getDefaultInstance().getJsonPayload();
+      public Builder clearMensajeJson() {
+        mensajeJson_ = getDefaultInstance().getMensajeJson();
         bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
@@ -1000,108 +954,60 @@ public final class MessageOut {
        * JSON serializado como string
        * </pre>
        *
-       * <code>string jsonPayload = 3;</code>
-       * @param value The bytes for jsonPayload to set.
+       * <code>string mensajeJson = 3;</code>
+       * @param value The bytes for mensajeJson to set.
        * @return This builder for chaining.
        */
-      public Builder setJsonPayloadBytes(
+      public Builder setMensajeJsonBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        jsonPayload_ = value;
+        mensajeJson_ = value;
         bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
 
-      private java.lang.Object recipients_ = "";
+      private int idSector_ ;
       /**
        * <pre>
-       * Lista de destinatarios
+       * Si es necesario se setea el idSector para definir destinatarios
        * </pre>
        *
-       * <code>string recipients = 4;</code>
-       * @return The recipients.
+       * <code>int32 idSector = 4;</code>
+       * @return The idSector.
        */
-      public java.lang.String getRecipients() {
-        java.lang.Object ref = recipients_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          recipients_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      @java.lang.Override
+      public int getIdSector() {
+        return idSector_;
       }
       /**
        * <pre>
-       * Lista de destinatarios
+       * Si es necesario se setea el idSector para definir destinatarios
        * </pre>
        *
-       * <code>string recipients = 4;</code>
-       * @return The bytes for recipients.
-       */
-      public com.google.protobuf.ByteString
-          getRecipientsBytes() {
-        java.lang.Object ref = recipients_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          recipients_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Lista de destinatarios
-       * </pre>
-       *
-       * <code>string recipients = 4;</code>
-       * @param value The recipients to set.
+       * <code>int32 idSector = 4;</code>
+       * @param value The idSector to set.
        * @return This builder for chaining.
        */
-      public Builder setRecipients(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        recipients_ = value;
+      public Builder setIdSector(int value) {
+        
+        idSector_ = value;
         bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * Lista de destinatarios
+       * Si es necesario se setea el idSector para definir destinatarios
        * </pre>
        *
-       * <code>string recipients = 4;</code>
+       * <code>int32 idSector = 4;</code>
        * @return This builder for chaining.
        */
-      public Builder clearRecipients() {
-        recipients_ = getDefaultInstance().getRecipients();
+      public Builder clearIdSector() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Lista de destinatarios
-       * </pre>
-       *
-       * <code>string recipients = 4;</code>
-       * @param value The bytes for recipients to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRecipientsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        recipients_ = value;
-        bitField0_ |= 0x00000008;
+        idSector_ = 0;
         onChanged();
         return this;
       }
@@ -1184,9 +1090,9 @@ public final class MessageOut {
   static {
     java.lang.String[] descriptorData = {
       "\n\020messageOut.proto\022\"coop.bancocredicoop." +
-      "omnited.config\"P\n\013MensajeJSON\022\n\n\002id\030\001 \001(" +
-      "\t\022\014\n\004type\030\002 \001(\t\022\023\n\013jsonPayload\030\003 \001(\t\022\022\n\n" +
-      "recipients\030\004 \001(\tb\006proto3"
+      "omnited.config\"\\\n\013MensajeJSON\022\021\n\tidMensa" +
+      "je\030\001 \001(\t\022\023\n\013mensajeType\030\002 \001(\t\022\023\n\013mensaje" +
+      "Json\030\003 \001(\t\022\020\n\010idSector\030\004 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1197,7 +1103,7 @@ public final class MessageOut {
     internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_descriptor,
-        new java.lang.String[] { "Id", "Type", "JsonPayload", "Recipients", });
+        new java.lang.String[] { "IdMensaje", "MensajeType", "MensajeJson", "IdSector", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

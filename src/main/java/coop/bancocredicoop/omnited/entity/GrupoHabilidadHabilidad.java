@@ -1,5 +1,6 @@
 package coop.bancocredicoop.omnited.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class GrupoHabilidadHabilidad {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("grupoHabilidadId")
     @JoinColumn(name = "id_grupo_habilidad")
+    @JsonBackReference
     private GrupoHabilidad grupoHabilidad;
 
     @ManyToOne(fetch = FetchType.LAZY)

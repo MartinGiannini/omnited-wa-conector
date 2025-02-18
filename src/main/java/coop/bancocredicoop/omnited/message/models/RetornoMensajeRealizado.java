@@ -1,16 +1,16 @@
 package coop.bancocredicoop.omnited.message.models;
 
-public class RetornoCambiosRealizados {
+public class RetornoMensajeRealizado {
     private String title;
     private String message;
     private String resultado;
 
     // Constructor por defecto
-    public RetornoCambiosRealizados() {
+    public RetornoMensajeRealizado() {
     }
 
     // Constructor parametrizado
-    public RetornoCambiosRealizados(String title, String message, String resultado) {
+    public RetornoMensajeRealizado(String title, String message, String resultado) {
         this.title = title;
         this.message = message;
         this.resultado = resultado;

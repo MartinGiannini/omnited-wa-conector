@@ -2,68 +2,49 @@ package coop.bancocredicoop.omnited.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coop.bancocredicoop.omnited.config.MessageOut;
-import coop.bancocredicoop.omnited.message.models.RetornoCambiosRealizados;
+import coop.bancocredicoop.omnited.message.models.RetornoMensajeRealizado;
 import coop.bancocredicoop.omnited.message.models.UsuarioDatos;
 import coop.bancocredicoop.omnited.service.db.UsuarioService;
-import coop.bancocredicoop.omnited.service.rabbit.RabbitSenderService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
 public class ModificaUsuarioPermisosOperacionHandler implements RabbitMessageHandler {
 
     private final UsuarioService usuarioService;
-    private final RabbitSenderService rabbitSenderService;
+    private final MessageToRabbit messageToRabbit;
 
-    public ModificaUsuarioPermisosOperacionHandler(UsuarioService usuarioService, RabbitSenderService rabbitSenderService) {
+    public ModificaUsuarioPermisosOperacionHandler(
+            UsuarioService usuarioService,
+            MessageToRabbit messageToRabbit
+    ) {
         this.usuarioService = usuarioService;
-        this.rabbitSenderService = rabbitSenderService;
+        this.messageToRabbit = messageToRabbit;
     }
 
+    // Crear una instancia de RetornoIngreso
+    RetornoMensajeRealizado cambios = new RetornoMensajeRealizado(
+            "Operación Exitosa",
+            "Los permisos fueron actualizados correctamente.",
+            "ok"
+    );
+
     @Override
-    public void handle(String jsonPayload, String idMensaje) throws Exception {
+    public void handle(String idMensaje, String mensajeJson) throws Exception {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            UsuarioDatos usuarioDatos = objectMapper.readValue(jsonPayload, UsuarioDatos.class);
+            UsuarioDatos usuarioDatos = objectMapper.readValue(mensajeJson, UsuarioDatos.class);
 
             // Llamar al servicio para guardar los permisos
             usuarioService.actualizaUsuarioPermisoOperacion(usuarioDatos.getIngresoDatos().getUsuario());
-
-            // Crear una instancia de RetornoIngreso
-            RetornoCambiosRealizados cambios = new RetornoCambiosRealizados(
-                    "Operación Exitosa",
-                    "Los permisos fueron actualizados correctamente.",
-                    "ok"
-            );
+            
+            String retornoCambios = objectMapper.writeValueAsString(usuarioDatos.getIngresoDatos().getUsuario());
+            messageToRabbit.processMessageDestino(idMensaje, "usuarioPermisosOperacionDB", retornoCambios, usuarioDatos.getIngresoDatos().getIdSector());
 
             String retorno = objectMapper.writeValueAsString(cambios);
+            messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
 
-            processMessage("cambiosRealizadosDB", retorno, idMensaje);
         } catch (JsonProcessingException e) {
             System.err.println("Error procesando permisos de operación del usuario: " + e.getMessage());
             throw e;
-        }
-    }
-
-    /**
-     * Método para enviar el mensaje al RabbitMQ.
-     *
-     * @param usuarioJson Usuario serializado como JSON
-     */
-    private void processMessage(String type, String usuarioJson, String idMensaje) {
-
-        try {
-            MessageOut.MensajeJSON message = MessageOut.MensajeJSON.newBuilder()
-                    .setId(idMensaje)
-                    .setType(type)
-                    .setJsonPayload(usuarioJson)
-                    //.setRecipients(usuarioNombre)
-                    .build();
-
-            // Usar el servicio RabbitSenderService para enviar el mensaje
-            rabbitSenderService.sendMessage(message);
-
-        } catch (Exception e) {
-            System.out.println("Error en el processMessage" + e);
         }
     }
 }

@@ -16,7 +16,7 @@ public class GrupoEstadosDatos {
 
     public static class IngresoDatos {
         private Long idSector;
-        private GrupoEstadoDTO seleccionados;
+        private GrupoEstadoDTO grupoDatos;
 
         public Long getIdSector() {
             return idSector;
@@ -26,12 +26,12 @@ public class GrupoEstadosDatos {
             this.idSector = idSector;
         }
 
-        public GrupoEstadoDTO getSeleccionados() {
-            return seleccionados;
+        public GrupoEstadoDTO getGrupoDatos() {
+            return grupoDatos;
         }
 
-        public void setSeleccionados(GrupoEstadoDTO seleccionados) {
-            this.seleccionados = seleccionados;
+        public void setGrupoDatos(GrupoEstadoDTO grupoDatos) {
+            this.grupoDatos = grupoDatos;
         }
     }
 }

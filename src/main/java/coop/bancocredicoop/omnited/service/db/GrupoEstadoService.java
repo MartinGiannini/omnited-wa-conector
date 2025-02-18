@@ -96,7 +96,7 @@ public class GrupoEstadoService {
     }
 
     @Transactional
-    public void guardarGrupoEstado(Long idSector, GrupoEstadoDTO grupoEstadoDTO) {
+    public GrupoEstadoDTO guardarGrupoEstado(Long idSector, GrupoEstadoDTO grupoEstadoDTO) {
 
         Sector sector = new Sector();
         sector.setIdSector(idSector);
@@ -122,5 +122,39 @@ public class GrupoEstadoService {
 
         // Guardar el grupo con los estados asociados
         grupoEstadoRepository.save(grupoEstado);
+
+        return convertirAGrupoEstadoDTO(grupoEstado);
+    }
+
+    public GrupoEstadoDTO convertirAGrupoEstadoDTO(GrupoEstado grupoEstado) {
+
+        GrupoEstadoDTO dto = new GrupoEstadoDTO();
+        dto.setIdGrupoEstado(grupoEstado.getIdGrupoEstado());
+        dto.setGrupoEstadoNombre(grupoEstado.getGrupoEstadoNombre());
+        
+        // Conversión de estados
+        Set<EstadoDTO> estados = grupoEstado.getGrupoEstadoEstado().stream()
+                .map(gee -> new EstadoDTO(
+                gee.getEstado().getIdEstado(),
+                gee.getEstado().getEstadoNombre(),
+                gee.getEstado().getEstadoProductivo(),
+                gee.getEstado().getEstadoDedicadoUsuarioFinal()
+        ))
+                .collect(Collectors.toSet());
+        dto.setEstado(estados);
+
+        // Si es necesario, asignar SectorDTO (dependiendo de la implementación)
+        dto.setSector(convertirSectorADTO(grupoEstado.getSector()));
+        return dto;
+
+    }
+
+    public SectorDTO convertirSectorADTO(Sector sector) {
+
+        SectorDTO sectorDTO = new SectorDTO();
+        sectorDTO.setIdSector(sector.getIdSector());
+        sectorDTO.setSectorNombre(sector.getSectorNombre());
+
+        return sectorDTO;
     }
 }

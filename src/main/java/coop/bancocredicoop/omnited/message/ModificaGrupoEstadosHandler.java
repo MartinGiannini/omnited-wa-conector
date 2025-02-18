@@ -2,11 +2,10 @@ package coop.bancocredicoop.omnited.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coop.bancocredicoop.omnited.config.MessageOut;
+import coop.bancocredicoop.omnited.exposition.GrupoEstadoDTO;
 import coop.bancocredicoop.omnited.message.models.GrupoEstadosDatos;
-import coop.bancocredicoop.omnited.message.models.RetornoCambiosRealizados;
+import coop.bancocredicoop.omnited.message.models.RetornoMensajeRealizado;
 import coop.bancocredicoop.omnited.service.db.GrupoEstadoService;
-import coop.bancocredicoop.omnited.service.rabbit.RabbitSenderService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
 /**
@@ -14,62 +13,50 @@ import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
  * @author mgiannini
  */
 public class ModificaGrupoEstadosHandler implements RabbitMessageHandler {
-    private final GrupoEstadoService grupoEstadoService;
-    private final RabbitSenderService rabbitSenderService;
 
-    public ModificaGrupoEstadosHandler(GrupoEstadoService grupoEstadoService, RabbitSenderService rabbitSenderService) {
+    private final GrupoEstadoService grupoEstadoService;
+    private final MessageToRabbit messageToRabbit;
+
+    public ModificaGrupoEstadosHandler(
+            GrupoEstadoService grupoEstadoService,
+            MessageToRabbit messageToRabbit) {
         this.grupoEstadoService = grupoEstadoService;
-        this.rabbitSenderService = rabbitSenderService;
+        this.messageToRabbit = messageToRabbit;
     }
-    
+
+    // Crear una instancia de RetornoIngreso
+    RetornoMensajeRealizado cambios = new RetornoMensajeRealizado(
+            "Operación Exitosa",
+            "El grupo fue actualizado correctamente.",
+            "ok"
+    );
+
     @Override
-    public void handle(String jsonPayload, String idMensaje) throws Exception {
+    public void handle(String idMensaje, String mensajeJson) throws Exception {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            GrupoEstadosDatos input = objectMapper.readValue(jsonPayload, GrupoEstadosDatos.class);
-            
-            if (input.getIngresoDatos().getSeleccionados().getIdGrupoEstado() == 1100011) {
-                grupoEstadoService.guardarGrupoEstado(input.getIngresoDatos().getIdSector(), input.getIngresoDatos().getSeleccionados());
-            } else {
-                grupoEstadoService.actualizarGrupoEstado(input.getIngresoDatos().getSeleccionados());
-            }
+            GrupoEstadosDatos grupoEstadosDatos = objectMapper.readValue(mensajeJson, GrupoEstadosDatos.class);
+            String retornoCambios;
+            String type;
 
-            // Crear una instancia de RetornoIngreso
-            RetornoCambiosRealizados cambios = new RetornoCambiosRealizados(
-                    "Operación Exitosa",
-                    "El grupo fue actualizado correctamente.",
-                    "ok"
-            );
+            if (grupoEstadosDatos.getIngresoDatos().getGrupoDatos().getIdGrupoEstado() == 1100011) {
+                GrupoEstadoDTO grupoGuardado = grupoEstadoService.guardarGrupoEstado(grupoEstadosDatos.getIngresoDatos().getIdSector(), grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
+                retornoCambios = objectMapper.writeValueAsString(grupoGuardado);
+                type = "agregaGrupoEstadosDB";
+            } else {
+                grupoEstadoService.actualizarGrupoEstado(grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
+                retornoCambios = objectMapper.writeValueAsString(grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
+                type = "actualizaGrupoEstadosDB";
+            }
+            
+            messageToRabbit.processMessageDestino(idMensaje, type, retornoCambios, grupoEstadosDatos.getIngresoDatos().getIdSector());
 
             String retorno = objectMapper.writeValueAsString(cambios);
-            processMessage("cambiosRealizadosDB", retorno, idMensaje);
-            
+            messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
+
         } catch (JsonProcessingException e) {
             System.err.println("Error actualizando el grupo de habilidades: " + e.getMessage());
             throw e;
-        }
-    }
-
-    /**
-     * Método para enviar el mensaje al RabbitMQ.
-     *
-     * @param usuarioJson Usuario serializado como JSON
-     */
-    private void processMessage(String type, String usuarioJson, String idMensaje) {
-
-        try {
-            MessageOut.MensajeJSON message = MessageOut.MensajeJSON.newBuilder()
-                    .setId(idMensaje)
-                    .setType(type)
-                    .setJsonPayload(usuarioJson)
-                    //.setRecipients(usuarioNombre)
-                    .build();
-
-            // Usar el servicio RabbitSenderService para enviar el mensaje
-            rabbitSenderService.sendMessage(message);
-
-        } catch (Exception e) {
-            System.out.println("Error en el processMessage" + e);
         }
     }
 }

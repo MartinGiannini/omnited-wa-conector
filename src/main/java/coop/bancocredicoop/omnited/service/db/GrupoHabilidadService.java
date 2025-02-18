@@ -68,10 +68,10 @@ public class GrupoHabilidadService {
         // Verificar si existe el grupo de habilidades
         GrupoHabilidad grupoHabilidad = grupoHabilidadRepository.findById(grupoHabilidadDTO.getIdGrupoHabilidad())
                 .orElseThrow(() -> new EntityNotFoundException("GrupoHabilidad no encontrado con ID: " + grupoHabilidadDTO.getIdGrupoHabilidad()));
-        
+
         // Eliminar habilidades previas
         grupoHabilidadRepository.deleteHabilidadesByGrupoHabilidad(grupoHabilidad.getIdGrupoHabilidad());
-        
+
         // Asociar las nuevas habilidades al grupo
         Set<GrupoHabilidadHabilidad> nuevasHabilidades = grupoHabilidadDTO.getHabilidad().stream()
                 .map(habilidadDTO -> {
@@ -89,17 +89,17 @@ public class GrupoHabilidadService {
         // Guardar las nuevas asociaciones en la base de datos
         grupoHabilidadHabilidadRepository.saveAll(nuevasHabilidades);
     }
-    
+
     @Transactional
-    public void guardarGrupoHabilidad(Long idSector, GrupoHabilidadDTO grupoHabilidadDTO) {
-        
+    public GrupoHabilidadDTO guardarGrupoHabilidad(Long idSector, GrupoHabilidadDTO grupoHabilidadDTO) {
+
         Sector sector = new Sector();
         sector.setIdSector(idSector);
-        
+
         GrupoHabilidad grupoHabilidad = new GrupoHabilidad();
         grupoHabilidad.setSector(sector);
         grupoHabilidad.setGrupoHabilidadNombre(grupoHabilidadDTO.getGrupoHabilidadNombre());
-        
+
         // Asociar habilidades al grupo
         Set<GrupoHabilidadHabilidad> habilidades = grupoHabilidadDTO.getHabilidad().stream().map(habilidadInput -> {
             Habilidad habilidad = habilidadRepository.findById(habilidadInput.getIdHabilidad())
@@ -117,5 +117,36 @@ public class GrupoHabilidadService {
 
         // Guardar el grupo con las habilidades asociadas
         grupoHabilidadRepository.save(grupoHabilidad);
+
+        return convertirAGrupoHabilidadDTO(grupoHabilidad);
+    }
+
+    public GrupoHabilidadDTO convertirAGrupoHabilidadDTO(GrupoHabilidad grupoHabilidad) {
+        GrupoHabilidadDTO dto = new GrupoHabilidadDTO();
+        dto.setIdGrupoHabilidad(grupoHabilidad.getIdGrupoHabilidad());
+        dto.setGrupoHabilidadNombre(grupoHabilidad.getGrupoHabilidadNombre());
+
+        // Conversión de habilidades
+        Set<HabilidadDTO> habilidades = grupoHabilidad.getGrupoHabilidadHabilidad().stream()
+                .map(ghh -> new HabilidadDTO(
+                ghh.getHabilidad().getIdHabilidad(),
+                ghh.getHabilidad().getHabilidadNombre(),
+                ghh.getGrupoHabilidadValor()
+        ))
+                .collect(Collectors.toSet());
+        dto.setHabilidad(habilidades);
+
+        // Si es necesario, asignar SectorDTO (dependiendo de la implementación)
+        dto.setSector(convertirSectorADTO(grupoHabilidad.getSector()));
+        return dto;
+    }
+
+    public SectorDTO convertirSectorADTO(Sector sector) {
+        
+        SectorDTO sectorDTO = new SectorDTO();
+        sectorDTO.setIdSector(sector.getIdSector());
+        sectorDTO.setSectorNombre(sector.getSectorNombre());
+        
+        return sectorDTO;
     }
 }

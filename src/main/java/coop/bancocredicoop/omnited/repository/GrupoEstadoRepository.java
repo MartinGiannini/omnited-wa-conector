@@ -15,6 +15,5 @@ public interface GrupoEstadoRepository extends JpaRepository<GrupoEstado, Long> 
          + "LEFT JOIN FETCH ges.estado "
          + "WHERE ge.sector.idSector IN :sectorIds")
     Set<GrupoEstado> findGrupoEstadosBySectores(Set<Long> sectorIds);
- 
     
 }

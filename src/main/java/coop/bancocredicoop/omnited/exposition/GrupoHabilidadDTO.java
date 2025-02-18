@@ -7,7 +7,7 @@ public class GrupoHabilidadDTO {
     private String grupoHabilidadNombre;
     private Set<HabilidadDTO> habilidad;
     private SectorDTO sector;
-
+    
     public GrupoHabilidadDTO(Long id, String nombre, Set<HabilidadDTO> habilidades, SectorDTO sector) {
         this.idGrupoHabilidad = id;
         this.grupoHabilidadNombre = nombre;
@@ -41,7 +41,7 @@ public class GrupoHabilidadDTO {
     public void setHabilidad(Set<HabilidadDTO> habilidades) {
         this.habilidad = habilidades;
     }
-
+    
     public SectorDTO getSector() {
         return sector;
     }
@@ -49,4 +49,5 @@ public class GrupoHabilidadDTO {
     public void setSector(SectorDTO sector) {
         this.sector = sector;
     }
+    
 }

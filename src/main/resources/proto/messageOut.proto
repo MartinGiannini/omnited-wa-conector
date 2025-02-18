@@ -5,11 +5,11 @@ package coop.bancocredicoop.omnited.config;
 // Mensaje para encapsular JSON con múltiples destinatarios
 message MensajeJSON {
     
-    string id = 1;             // Un campo de tipo string con el identificador único
+    string idMensaje = 1;               // Un campo de tipo string con el identificador único
     
-    string type = 2;           // Tipo de mensaje
+    string mensajeType = 2;             // Tipo de mensaje
     
-    string jsonPayload = 3;    // JSON serializado como string
+    string mensajeJson = 3;             // JSON serializado como string
     
-    string recipients = 4;     // Lista de destinatarios
+    int32 idSector = 4;                   // Si es necesario se setea el idSector para definir destinatarios
 }

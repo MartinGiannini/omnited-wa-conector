@@ -31,9 +31,9 @@ public class SectorService {
 
     @Transactional
     public Set<SectorDTO> getSectoresByUsuarioSectores(Set<Long> sectorIds) {
-        // Obtiene los sectores con las relaciones necesarias
+        
         Set<Sector> sectores = sectorRepository.findByIdInWithDetails(sectorIds);
-
+        
         return sectores.stream().map(sector -> new SectorDTO(
                 sector.getIdSector(),
                 sector.getSectorNombre(),

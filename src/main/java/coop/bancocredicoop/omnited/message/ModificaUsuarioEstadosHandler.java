@@ -2,69 +2,50 @@ package coop.bancocredicoop.omnited.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coop.bancocredicoop.omnited.config.MessageOut;
-import coop.bancocredicoop.omnited.message.models.RetornoCambiosRealizados;
+import coop.bancocredicoop.omnited.message.models.RetornoMensajeRealizado;
 import coop.bancocredicoop.omnited.message.models.UsuarioDatos;
 import coop.bancocredicoop.omnited.service.db.UsuarioService;
-import coop.bancocredicoop.omnited.service.rabbit.RabbitSenderService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
 public class ModificaUsuarioEstadosHandler implements RabbitMessageHandler {
 
     private final UsuarioService usuarioService;
-    private final RabbitSenderService rabbitSenderService;
+    private final MessageToRabbit messageToRabbit;
 
-    public ModificaUsuarioEstadosHandler(UsuarioService usuarioService, RabbitSenderService rabbitSenderService) {
+    public ModificaUsuarioEstadosHandler(
+            UsuarioService usuarioService,
+            MessageToRabbit messageToRabbit
+    ) {
         this.usuarioService = usuarioService;
-        this.rabbitSenderService = rabbitSenderService;
+        this.messageToRabbit = messageToRabbit;
     }
 
+    // Crear una instancia de RetornoIngreso
+    RetornoMensajeRealizado mensajeRealizado = new RetornoMensajeRealizado(
+            "Operación Exitosa",
+            "Los estados fueron actualizados correctamente.",
+            "ok"
+    );
+
     @Override
-    public void handle(String jsonPayload, String idMensaje) throws Exception {
+    public void handle(String idMensaje, String mensajeJson) throws Exception {
         try {
             // Deserializar el JSON recibido
             ObjectMapper objectMapper = new ObjectMapper();
-            UsuarioDatos usuarioDatos = objectMapper.readValue(jsonPayload, UsuarioDatos.class);
+            UsuarioDatos usuarioDatos = objectMapper.readValue(mensajeJson, UsuarioDatos.class);
 
             // Llamar al servicio para guardar los estados
             usuarioService.actualizarUsuarioEstado(usuarioDatos.getIngresoDatos().getUsuario());
 
-            // Crear una instancia de RetornoIngreso
-            RetornoCambiosRealizados cambios = new RetornoCambiosRealizados(
-                    "Operación Exitosa",
-                    "Los estados fueron actualizados correctamente.",
-                    "ok"
-            );
-            
-            String retorno = objectMapper.writeValueAsString(cambios);
+            String retornoCambios = objectMapper.writeValueAsString(usuarioDatos.getIngresoDatos().getUsuario());
+            messageToRabbit.processMessageDestino(idMensaje, "usuarioEstadosDB", retornoCambios, usuarioDatos.getIngresoDatos().getIdSector());
 
-            processMessage("cambiosRealizadosDB", retorno, idMensaje);
+            String retorno = objectMapper.writeValueAsString(mensajeRealizado);
+            messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
+
         } catch (JsonProcessingException e) {
             System.err.println("Error procesando estados del usuario: " + e.getMessage());
             throw e;
-        }
-    }
-    
-    /**
-     * Método para enviar el mensaje al RabbitMQ.
-     *
-     * @param usuarioJson Usuario serializado como JSON
-     */
-    private void processMessage(String type, String usuarioJson, String idMensaje) {
-
-        try {
-            MessageOut.MensajeJSON message = MessageOut.MensajeJSON.newBuilder()
-                    .setId(idMensaje)
-                    .setType(type)
-                    .setJsonPayload(usuarioJson)
-                    //.setRecipients(usuarioNombre)
-                    .build();
-
-            // Usar el servicio RabbitSenderService para enviar el mensaje
-            rabbitSenderService.sendMessage(message);
-
-        } catch (Exception e) {
-            System.out.println("Error en el processMessage" + e);
         }
     }
 }

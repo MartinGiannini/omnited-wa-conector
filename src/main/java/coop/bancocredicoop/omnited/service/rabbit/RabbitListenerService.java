@@ -1,6 +1,7 @@
 package coop.bancocredicoop.omnited.service.rabbit;
 
 import coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON;
+import coop.bancocredicoop.omnited.message.MessageToRabbit;
 import coop.bancocredicoop.omnited.message.ModificaGrupoEstadosHandler;
 import coop.bancocredicoop.omnited.message.ModificaGrupoHabilidadesHandler;
 import coop.bancocredicoop.omnited.message.ModificaColaHandler;
@@ -26,7 +27,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RabbitListenerService {
 
-    //private final ObjectMapper objectMapper = new ObjectMapper();
     private final Map<String, RabbitMessageHandler> handlers = new HashMap<>();
 
     /**
@@ -39,7 +39,7 @@ public class RabbitListenerService {
      * @param permisoService
      * @param estrategiaService
      * @param colaService
-     * @param rabbitSenderService
+     * @param messageToRabbit
      */
     public RabbitListenerService(
             UsuarioService usuarioService,
@@ -49,19 +49,19 @@ public class RabbitListenerService {
             PermisoService permisoService,
             EstrategiaService estrategiaService,
             ColaService colaService,
-            RabbitSenderService rabbitSenderService
+            MessageToRabbit messageToRabbit
     ) {
         // Registrar handlers para cada tipo de mensaje
-        handlers.put("usuariologinWS", new UsuarioLoginHandler(usuarioService, permisoService, rabbitSenderService));
-        handlers.put("usuariologinsectoresWS", new UsuarioLoginSectoresHandler(sectorService, rabbitSenderService));
-        handlers.put("usuariologingruposWS", new UsuarioLoginGruposHandler(grupoEstadoService, grupoHabilidadService, estrategiaService, rabbitSenderService));
-        handlers.put("usuarioHabilidadesWS", new ModificaUsuarioHabilidadesHandler(usuarioService, rabbitSenderService));
-        handlers.put("usuarioEstadosWS", new ModificaUsuarioEstadosHandler(usuarioService, rabbitSenderService));
-        handlers.put("permisosOperacionWS", new ModificaUsuarioPermisosOperacionHandler(usuarioService, rabbitSenderService));
-        handlers.put("permisosSupervisionWS", new ModificaUsuarioPermisosSupervisionHandler(usuarioService, rabbitSenderService));
-        handlers.put("modificaColaWS", new ModificaColaHandler(colaService, rabbitSenderService));
-        handlers.put("grupoHabilidadesWS", new ModificaGrupoHabilidadesHandler(grupoHabilidadService, rabbitSenderService));
-        handlers.put("grupoEstadosWS", new ModificaGrupoEstadosHandler(grupoEstadoService, rabbitSenderService));
+        handlers.put("usuariologinWS", new UsuarioLoginHandler(usuarioService, permisoService, messageToRabbit));
+        handlers.put("usuariologinsectoresWS", new UsuarioLoginSectoresHandler(sectorService, messageToRabbit));
+        handlers.put("usuariologingruposWS", new UsuarioLoginGruposHandler(grupoEstadoService, grupoHabilidadService, estrategiaService, messageToRabbit));
+        handlers.put("usuarioHabilidadesWS", new ModificaUsuarioHabilidadesHandler(usuarioService, messageToRabbit));
+        handlers.put("usuarioEstadosWS", new ModificaUsuarioEstadosHandler(usuarioService, messageToRabbit));
+        handlers.put("permisosOperacionWS", new ModificaUsuarioPermisosOperacionHandler(usuarioService, messageToRabbit));
+        handlers.put("permisosSupervisionWS", new ModificaUsuarioPermisosSupervisionHandler(usuarioService, messageToRabbit));
+        handlers.put("modificaColaWS", new ModificaColaHandler(colaService, messageToRabbit));
+        handlers.put("grupoHabilidadesWS", new ModificaGrupoHabilidadesHandler(grupoHabilidadService, messageToRabbit));
+        handlers.put("grupoEstadosWS", new ModificaGrupoEstadosHandler(grupoEstadoService, messageToRabbit));
     }
 
     /**
@@ -82,23 +82,17 @@ public class RabbitListenerService {
     public void receiveMessage(MensajeJSON message) {
 
         try {
-            String idMensaje = message.getId();
-            String type = message.getType();
-            String jsonPayload = message.getJsonPayload();
-
-            System.out.println("");
-            System.out.println("*****************************************************");
-            System.out.println("el ID que llega es: " + idMensaje + " el type es: " + type);
-            System.out.println("*****************************************************");
-            System.out.println("");
-
+            String idMensaje = message.getIdMensaje();
+            String mensajeType = message.getMensajeType();
+            String mensajeJson = message.getMensajeJson();
+            
             // Identificar y procesar el mensaje según su tipo
-            RabbitMessageHandler handler = handlers.get(type);
+            RabbitMessageHandler handler = handlers.get(mensajeType);
 
             if (handler != null) {
-                handler.handle(jsonPayload, idMensaje);
+                handler.handle(idMensaje, mensajeJson);
             } else {
-                System.err.println("No handler found for type: " + type);
+                System.err.println("No handler found for type: " + mensajeType);
             }
         } catch (Exception e) {
             System.err.println("Error handling message: " + e.getMessage());

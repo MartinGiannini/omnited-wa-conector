@@ -16,7 +16,7 @@ public class GrupoHabilidadesDatos {
 
     public static class IngresoDatos {
         private Long idSector;
-        private GrupoHabilidadDTO seleccionados;
+        private GrupoHabilidadDTO grupoDatos;
 
         public Long getIdSector() {
             return idSector;
@@ -26,12 +26,12 @@ public class GrupoHabilidadesDatos {
             this.idSector = idSector;
         }
 
-        public GrupoHabilidadDTO getSeleccionados() {
-            return seleccionados;
+        public GrupoHabilidadDTO getGrupoDatos() {
+            return grupoDatos;
         }
 
-        public void setSeleccionados(GrupoHabilidadDTO seleccionados) {
-            this.seleccionados = seleccionados;
+        public void setGrupoDatos(GrupoHabilidadDTO grupoDatos) {
+            this.grupoDatos = grupoDatos;
         }
     }
 }

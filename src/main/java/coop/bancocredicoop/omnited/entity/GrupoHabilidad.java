@@ -1,5 +1,6 @@
 package coop.bancocredicoop.omnited.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class GrupoHabilidad {
     private Sector sector;
 
     @OneToMany(mappedBy = "grupoHabilidad", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<GrupoHabilidadHabilidad> grupoHabilidadHabilidad;
 
     public GrupoHabilidad() {
