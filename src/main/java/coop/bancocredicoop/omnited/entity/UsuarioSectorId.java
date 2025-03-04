@@ -10,6 +10,14 @@ public class UsuarioSectorId implements Serializable {
     private Long usuarioId;
     private Long sectorId;
 
+    public UsuarioSectorId() {
+    }
+
+    public UsuarioSectorId(Long usuarioId, Long sectorId) {
+        this.usuarioId = usuarioId;
+        this.sectorId = sectorId;
+    }
+
     // Getters y Setters
     public Long getUsuarioId() {
         return usuarioId;

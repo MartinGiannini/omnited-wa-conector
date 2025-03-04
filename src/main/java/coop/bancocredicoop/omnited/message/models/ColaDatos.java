@@ -33,7 +33,5 @@ public class ColaDatos {
         public void setCola(ColaDTO cola) {
             this.cola = cola;
         }
-
-        
     }
 }

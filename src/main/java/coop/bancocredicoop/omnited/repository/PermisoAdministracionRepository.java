@@ -9,6 +9,8 @@ import coop.bancocredicoop.omnited.entity.PermisoAdministracion;
 
 @Repository
 public interface PermisoAdministracionRepository extends JpaRepository<PermisoAdministracion, Long> {
+    
     @Query("SELECT pa FROM PermisoAdministracion pa")
     Set<PermisoAdministracion> findAllPermisosAdministracion();
+    
 }

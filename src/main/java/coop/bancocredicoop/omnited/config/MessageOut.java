@@ -89,6 +89,16 @@ public final class MessageOut {
      * @return The idSector.
      */
     int getIdSector();
+
+    /**
+     * <pre>
+     * Si es necesario se setea el idUsuario para definir destinatario.
+     * </pre>
+     *
+     * <code>int32 idUsuario = 5;</code>
+     * @return The idUsuario.
+     */
+    int getIdUsuario();
   }
   /**
    * <pre>
@@ -293,6 +303,21 @@ public final class MessageOut {
       return idSector_;
     }
 
+    public static final int IDUSUARIO_FIELD_NUMBER = 5;
+    private int idUsuario_ = 0;
+    /**
+     * <pre>
+     * Si es necesario se setea el idUsuario para definir destinatario.
+     * </pre>
+     *
+     * <code>int32 idUsuario = 5;</code>
+     * @return The idUsuario.
+     */
+    @java.lang.Override
+    public int getIdUsuario() {
+      return idUsuario_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -319,6 +344,9 @@ public final class MessageOut {
       if (idSector_ != 0) {
         output.writeInt32(4, idSector_);
       }
+      if (idUsuario_ != 0) {
+        output.writeInt32(5, idUsuario_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -340,6 +368,10 @@ public final class MessageOut {
       if (idSector_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, idSector_);
+      }
+      if (idUsuario_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, idUsuario_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -364,6 +396,8 @@ public final class MessageOut {
           .equals(other.getMensajeJson())) return false;
       if (getIdSector()
           != other.getIdSector()) return false;
+      if (getIdUsuario()
+          != other.getIdUsuario()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -383,6 +417,8 @@ public final class MessageOut {
       hash = (53 * hash) + getMensajeJson().hashCode();
       hash = (37 * hash) + IDSECTOR_FIELD_NUMBER;
       hash = (53 * hash) + getIdSector();
+      hash = (37 * hash) + IDUSUARIO_FIELD_NUMBER;
+      hash = (53 * hash) + getIdUsuario();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -520,6 +556,7 @@ public final class MessageOut {
         mensajeType_ = "";
         mensajeJson_ = "";
         idSector_ = 0;
+        idUsuario_ = 0;
         return this;
       }
 
@@ -564,6 +601,9 @@ public final class MessageOut {
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
           result.idSector_ = idSector_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.idUsuario_ = idUsuario_;
         }
       }
 
@@ -629,6 +669,9 @@ public final class MessageOut {
         if (other.getIdSector() != 0) {
           setIdSector(other.getIdSector());
         }
+        if (other.getIdUsuario() != 0) {
+          setIdUsuario(other.getIdUsuario());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -675,10 +718,17 @@ public final class MessageOut {
                 bitField0_ |= 0x00000008;
                 break;
               } // case 32
+              case 40: {
+                idUsuario_ = input.readInt32();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
               default: {
-                //if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  /*
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
-                //}
+                }
+                  */
                 break;
               } // default:
             } // switch (tag)
@@ -1011,6 +1061,50 @@ public final class MessageOut {
         onChanged();
         return this;
       }
+
+      private int idUsuario_ ;
+      /**
+       * <pre>
+       * Si es necesario se setea el idUsuario para definir destinatario.
+       * </pre>
+       *
+       * <code>int32 idUsuario = 5;</code>
+       * @return The idUsuario.
+       */
+      @java.lang.Override
+      public int getIdUsuario() {
+        return idUsuario_;
+      }
+      /**
+       * <pre>
+       * Si es necesario se setea el idUsuario para definir destinatario.
+       * </pre>
+       *
+       * <code>int32 idUsuario = 5;</code>
+       * @param value The idUsuario to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIdUsuario(int value) {
+        
+        idUsuario_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Si es necesario se setea el idUsuario para definir destinatario.
+       * </pre>
+       *
+       * <code>int32 idUsuario = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIdUsuario() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        idUsuario_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1090,9 +1184,10 @@ public final class MessageOut {
   static {
     java.lang.String[] descriptorData = {
       "\n\020messageOut.proto\022\"coop.bancocredicoop." +
-      "omnited.config\"\\\n\013MensajeJSON\022\021\n\tidMensa" +
+      "omnited.config\"o\n\013MensajeJSON\022\021\n\tidMensa" +
       "je\030\001 \001(\t\022\023\n\013mensajeType\030\002 \001(\t\022\023\n\013mensaje" +
-      "Json\030\003 \001(\t\022\020\n\010idSector\030\004 \001(\005b\006proto3"
+      "Json\030\003 \001(\t\022\020\n\010idSector\030\004 \001(\005\022\021\n\tidUsuari" +
+      "o\030\005 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1103,7 +1198,7 @@ public final class MessageOut {
     internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_descriptor,
-        new java.lang.String[] { "IdMensaje", "MensajeType", "MensajeJson", "IdSector", });
+        new java.lang.String[] { "IdMensaje", "MensajeType", "MensajeJson", "IdSector", "IdUsuario", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -12,12 +12,12 @@ import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
  *
  * @author mgiannini
  */
-public class ModificaGrupoEstadosHandler implements RabbitMessageHandler {
+public class GrupoEstadosModificaHandler implements RabbitMessageHandler {
 
     private final GrupoEstadoService grupoEstadoService;
     private final MessageToRabbit messageToRabbit;
 
-    public ModificaGrupoEstadosHandler(
+    public GrupoEstadosModificaHandler(
             GrupoEstadoService grupoEstadoService,
             MessageToRabbit messageToRabbit) {
         this.grupoEstadoService = grupoEstadoService;
@@ -42,14 +42,14 @@ public class ModificaGrupoEstadosHandler implements RabbitMessageHandler {
             if (grupoEstadosDatos.getIngresoDatos().getGrupoDatos().getIdGrupoEstado() == 1100011) {
                 GrupoEstadoDTO grupoGuardado = grupoEstadoService.guardarGrupoEstado(grupoEstadosDatos.getIngresoDatos().getIdSector(), grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
                 retornoCambios = objectMapper.writeValueAsString(grupoGuardado);
-                type = "agregaGrupoEstadosDB";
+                type = "grupoEstadosAgregaDB";
             } else {
                 grupoEstadoService.actualizarGrupoEstado(grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
                 retornoCambios = objectMapper.writeValueAsString(grupoEstadosDatos.getIngresoDatos().getGrupoDatos());
-                type = "actualizaGrupoEstadosDB";
+                type = "grupoEstadosModificaDB";
             }
             
-            messageToRabbit.processMessageDestino(idMensaje, type, retornoCambios, grupoEstadosDatos.getIngresoDatos().getIdSector());
+            messageToRabbit.processMessageMulticast(idMensaje, type, retornoCambios, grupoEstadosDatos.getIngresoDatos().getIdSector());
 
             String retorno = objectMapper.writeValueAsString(cambios);
             messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);

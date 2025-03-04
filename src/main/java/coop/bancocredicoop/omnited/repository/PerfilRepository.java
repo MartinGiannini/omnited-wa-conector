@@ -1,12 +1,10 @@
 package coop.bancocredicoop.omnited.repository;
 
-import coop.bancocredicoop.omnited.entity.Cola;
+import coop.bancocredicoop.omnited.entity.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ColaRepository extends JpaRepository<Cola, Long> {
+public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 
-    
-    
 }

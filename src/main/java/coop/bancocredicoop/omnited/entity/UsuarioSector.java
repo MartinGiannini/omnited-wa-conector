@@ -27,6 +27,12 @@ public class UsuarioSector {
         this.usuario = usuario;
         this.sector = sector;
     }
+    
+    public UsuarioSector(Usuario usuario, Sector sector) {
+        this.id = new UsuarioSectorId(usuario.getIdUsuario(), sector.getIdSector());
+        this.usuario = usuario;
+        this.sector = sector;
+    }
 
     public UsuarioSectorId getId() {
         return id;

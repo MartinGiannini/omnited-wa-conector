@@ -1,1 +1,3 @@
 1) La clase SectorDatos hay que corregirla, utilizar SectorDTO y hacer las modificaciones en los Handler para que utilicen la clase modificada en vez del Set<Long>
+2) Cuando se modifica un Usuario o se crea un usuario hay que agregar la extension en el mensaje de vuelta. 
+Chequear en la modificacion del usuario de enviar la extension junto con los datos del usuario.

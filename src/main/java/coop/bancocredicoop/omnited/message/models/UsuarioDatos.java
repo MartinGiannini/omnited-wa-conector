@@ -1,6 +1,8 @@
 package coop.bancocredicoop.omnited.message.models;
 
+import coop.bancocredicoop.omnited.entity.Sector;
 import coop.bancocredicoop.omnited.exposition.UsuarioDTO;
+import java.util.Set;
 
 public class UsuarioDatos {
     
@@ -16,6 +18,7 @@ public class UsuarioDatos {
 
     public static class IngresoDatos {
         private Long idSector;
+        private Set<Sector> sectores;
         private UsuarioDTO usuario;
     
         public Long getIdSector() {
@@ -24,6 +27,14 @@ public class UsuarioDatos {
 
         public void setIdSector(Long sector) {
             this.idSector = sector;
+        }
+
+        public Set<Sector> getSectores() {
+            return sectores;
+        }
+
+        public void setSectores(Set<Sector> sectores) {
+            this.sectores = sectores;
         }
 
         public UsuarioDTO getUsuario() {

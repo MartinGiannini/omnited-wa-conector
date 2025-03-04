@@ -12,20 +12,22 @@ public class ColaDTO {
     private Long colaDesborde;
     private Long colaPrioridad;
     private Set<HabilidadDTO> colaHabilidad; // Habilidades asociadas a la cola
+    private Long idSector;
 
     public ColaDTO() {
     }
 
-    public ColaDTO(Long id, String nombre, EstrategiaDTO estrategia, Long ringueo, Long espera, Long autoPausa, Long desborde, Long prioridad, Set<HabilidadDTO> habilidades) {
-        this.idCola = id;
-        this.colaNombre = nombre;
-        this.colaEstrategia = estrategia;
-        this.colaRingueo = ringueo;
-        this.colaEspera = espera;
-        this.colaAutoPausa = autoPausa;
-        this.colaDesborde = desborde;
-        this.colaPrioridad = prioridad;
-        this.colaHabilidad = habilidades;
+    public ColaDTO(Long idCola, String colaNombre, EstrategiaDTO colaEstrategia, Long colaRingueo, Long colaEspera, Long colaAutoPausa, Long colaDesborde, Long colaPrioridad, Set<HabilidadDTO> colaHabilidad, Long idSector) {
+        this.idCola = idCola;
+        this.colaNombre = colaNombre;
+        this.colaEstrategia = colaEstrategia;
+        this.colaRingueo = colaRingueo;
+        this.colaEspera = colaEspera;
+        this.colaAutoPausa = colaAutoPausa;
+        this.colaDesborde = colaDesborde;
+        this.colaPrioridad = colaPrioridad;
+        this.colaHabilidad = colaHabilidad;
+        this.idSector = idSector;
     }
 
     public Long getIdCola() {
@@ -98,5 +100,13 @@ public class ColaDTO {
 
     public void setColaHabilidad(Set<HabilidadDTO> habilidades) {
         this.colaHabilidad = habilidades;
+    }
+
+    public Long getIdSector() {
+        return idSector;
+    }
+
+    public void setIdSector(Long idSector) {
+        this.idSector = idSector;
     }
 }

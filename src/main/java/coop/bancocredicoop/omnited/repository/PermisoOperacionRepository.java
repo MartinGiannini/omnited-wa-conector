@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PermisoOperacionRepository extends JpaRepository<PermisoOperacion, Long> {
+    
     @Query("SELECT po FROM PermisoOperacion po")
     Set<PermisoOperacion> findAllPermisosOperacion();
+    
 }

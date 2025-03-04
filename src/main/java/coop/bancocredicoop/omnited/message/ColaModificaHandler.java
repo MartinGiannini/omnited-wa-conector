@@ -2,21 +2,26 @@ package coop.bancocredicoop.omnited.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import coop.bancocredicoop.omnited.entity.Cola;
 import coop.bancocredicoop.omnited.message.models.ColaDatos;
 import coop.bancocredicoop.omnited.message.models.RetornoMensajeRealizado;
+import coop.bancocredicoop.omnited.service.db.ColaHabilidadService;
 import coop.bancocredicoop.omnited.service.db.ColaService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
-public class ModificaColaHandler implements RabbitMessageHandler {
+public class ColaModificaHandler implements RabbitMessageHandler {
 
     private final ColaService colaService;
+    private final ColaHabilidadService colaHabilidadService;
     private final MessageToRabbit messageToRabbit;
 
-    public ModificaColaHandler(
+    public ColaModificaHandler(
             ColaService colaService,
+            ColaHabilidadService colaHabilidadService,
             MessageToRabbit messageToRabbit
     ) {
         this.colaService = colaService;
+        this.colaHabilidadService = colaHabilidadService;
         this.messageToRabbit = messageToRabbit;
     }
 
@@ -30,15 +35,24 @@ public class ModificaColaHandler implements RabbitMessageHandler {
     @Override
     public void handle(String idMensaje, String mensajeJson) throws Exception {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-
+            ObjectMapper objectMapper = new ObjectMapper();            
             ColaDatos colaDatos = objectMapper.readValue(mensajeJson, ColaDatos.class);
-
-            colaService.actualizarCola(colaDatos.getIngresoDatos().getCola());
+            String type;
             
-            String retornoCambios = objectMapper.writeValueAsString(colaDatos.getIngresoDatos().getCola());
-            messageToRabbit.processMessageDestino(idMensaje, "sectorColaDB", retornoCambios, colaDatos.getIngresoDatos().getIdSector());
-
+            if (colaDatos.getIngresoDatos().getCola().getIdCola() != null) {
+                colaService.colaActualizar(colaDatos.getIngresoDatos().getCola());
+                type = "colaActualizarDB";
+            } else {
+                Cola cola = colaService.colaAgregar(colaDatos.getIngresoDatos().getIdSector(), colaDatos.getIngresoDatos().getCola());
+                colaHabilidadService.asociarHabilidadesACola(cola, colaDatos.getIngresoDatos().getCola().getColaHabilidad());
+                colaDatos.getIngresoDatos().getCola().setIdCola(cola.getIdCola());
+                type = "colaAgregarDB";
+            }
+            
+            colaDatos.getIngresoDatos().getCola().setIdSector(colaDatos.getIngresoDatos().getIdSector());
+            String colaJson = objectMapper.writeValueAsString(colaDatos.getIngresoDatos().getCola());
+            messageToRabbit.processMessageMulticast(idMensaje, type, colaJson, colaDatos.getIngresoDatos().getIdSector());
+            
             String retorno = objectMapper.writeValueAsString(cambios);
             messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
 

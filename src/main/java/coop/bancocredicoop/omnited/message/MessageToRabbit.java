@@ -35,7 +35,7 @@ public class MessageToRabbit {
         }
     }
     
-    public void processMessageDestino(String idMensaje, String mensajeType, String mensajeJson, Long idSector) {
+    public void processMessageMulticast(String idMensaje, String mensajeType, String mensajeJson, Long idSector) {
         
         try {
             MensajeJSON message = MensajeJSON.newBuilder()
@@ -43,6 +43,24 @@ public class MessageToRabbit {
                     .setMensajeType(mensajeType)
                     .setMensajeJson(mensajeJson)
                     .setIdSector(Math.toIntExact(idSector))
+                    .build();
+
+            // Usar el servicio RabbitSenderService para enviar el mensaje
+            rabbitSenderService.sendMessage(message);
+
+        } catch (Exception e) {
+            System.out.println("Error en el processMessage" + e);
+        }
+    }
+    
+    public void processMessageUnicast(String idMensaje, String mensajeType, String mensajeJson, Long idUsuario) {
+        
+        try {
+            MensajeJSON message = MensajeJSON.newBuilder()
+                    .setIdMensaje(idMensaje)
+                    .setMensajeType(mensajeType)
+                    .setMensajeJson(mensajeJson)
+                    .setIdUsuario(Math.toIntExact(idUsuario))
                     .build();
 
             // Usar el servicio RabbitSenderService para enviar el mensaje

@@ -9,12 +9,12 @@ import coop.bancocredicoop.omnited.message.models.RetornoMensajeRealizado;
 import coop.bancocredicoop.omnited.service.db.GrupoHabilidadService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
-public class ModificaGrupoHabilidadesHandler implements RabbitMessageHandler {
+public class GrupoHabilidadesModificaHandler implements RabbitMessageHandler {
 
     private final GrupoHabilidadService grupoHabilidadService;
     private final MessageToRabbit messageToRabbit;
 
-    public ModificaGrupoHabilidadesHandler(
+    public GrupoHabilidadesModificaHandler(
             GrupoHabilidadService grupoHabilidadService,
             MessageToRabbit messageToRabbit
     ) {
@@ -40,14 +40,14 @@ public class ModificaGrupoHabilidadesHandler implements RabbitMessageHandler {
             if (grupoHabilidadesDatos.getIngresoDatos().getGrupoDatos().getIdGrupoHabilidad() == 1100011) {
                 GrupoHabilidadDTO grupoGuardado = grupoHabilidadService.guardarGrupoHabilidad(grupoHabilidadesDatos.getIngresoDatos().getIdSector(), grupoHabilidadesDatos.getIngresoDatos().getGrupoDatos());
                 retornoCambios = objectMapper.writeValueAsString(grupoGuardado);
-                type = "agregaGrupoHabilidadesDB";
+                type = "grupoHabilidadesAgregaDB";
             } else {
                 grupoHabilidadService.actualizarGrupoHabilidad(grupoHabilidadesDatos.getIngresoDatos().getGrupoDatos());
                 retornoCambios = objectMapper.writeValueAsString(grupoHabilidadesDatos.getIngresoDatos().getGrupoDatos());
-                type = "actualizaGrupoHabilidadesDB";
+                type = "grupoHabilidadesModificaDB";
             }
 
-            messageToRabbit.processMessageDestino(idMensaje, type, retornoCambios, grupoHabilidadesDatos.getIngresoDatos().getIdSector());
+            messageToRabbit.processMessageMulticast(idMensaje, type, retornoCambios, grupoHabilidadesDatos.getIngresoDatos().getIdSector());
 
             String retorno = objectMapper.writeValueAsString(cambios);
             messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
@@ -57,6 +57,4 @@ public class ModificaGrupoHabilidadesHandler implements RabbitMessageHandler {
             throw e;
         }
     }
-
-    
 }

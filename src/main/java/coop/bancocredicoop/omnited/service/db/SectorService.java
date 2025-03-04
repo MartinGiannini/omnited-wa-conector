@@ -29,11 +29,11 @@ public class SectorService {
         this.sectorRepository = sectorRepository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Set<SectorDTO> getSectoresByUsuarioSectores(Set<Long> sectorIds) {
-        
+
         Set<Sector> sectores = sectorRepository.findByIdInWithDetails(sectorIds);
-        
+
         return sectores.stream().map(sector -> new SectorDTO(
                 sector.getIdSector(),
                 sector.getSectorNombre(),
@@ -77,7 +77,8 @@ public class SectorService {
                         ch.getHabilidad().getIdHabilidad(),
                         ch.getHabilidad().getHabilidadNombre(),
                         null
-                )).collect(Collectors.toSet())
+                )).collect(Collectors.toSet()),
+                        cola.getSector().getIdSector()
                 ))
                         .collect(Collectors.toSet()),
                 // Mapeo de usuarios
@@ -124,8 +125,22 @@ public class SectorService {
                                 })
                                 .collect(Collectors.toSet()),
                         null,
-                        null,
-                        null,
+                        usuarioSector.getUsuario().getUsuarioPermisoAdministracion().stream()
+                                .map(po -> {
+                                    PermisoDTO permisoDTO = new PermisoDTO();
+                                    permisoDTO.setIdPermiso(po.getPermisoAdministracion().getIdPermisoAdministracion());
+                                    permisoDTO.setPermisoNombre(po.getPermisoAdministracion().getPermisoAdministracionNombre());
+                                    return permisoDTO;
+                                })
+                                .collect(Collectors.toSet()),
+                        usuarioSector.getUsuario().getUsuarioPermisoSupervision().stream()
+                                .map(po -> {
+                                    PermisoDTO permisoDTO = new PermisoDTO();
+                                    permisoDTO.setIdPermiso(po.getPermisoSupervision().getIdPermisoSupervision());
+                                    permisoDTO.setPermisoNombre(po.getPermisoSupervision().getPermisoSupervisionNombre());
+                                    return permisoDTO;
+                                })
+                                .collect(Collectors.toSet()),
                         usuarioSector.getUsuario().getUsuarioPermisoOperacion().stream()
                                 .map(po -> {
                                     PermisoDTO permisoDTO = new PermisoDTO();
@@ -134,7 +149,8 @@ public class SectorService {
                                     return permisoDTO;
                                 })
                                 .collect(Collectors.toSet())
-                ))
+                )
+                        )
                         .collect(Collectors.toSet()),
                 // Mapeo de Grupos de Estados
                 sector.getGrupoEstado().stream()

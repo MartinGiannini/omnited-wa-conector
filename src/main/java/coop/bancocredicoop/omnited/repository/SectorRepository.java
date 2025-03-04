@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface SectorRepository extends JpaRepository<Sector, Long> {
 
     @Query("SELECT s FROM Sector s "
+            + "LEFT JOIN FETCH s.sectorDepartamento d "
             + "LEFT JOIN FETCH s.sectorEstado e "
             + "LEFT JOIN FETCH s.sectorHabilidad h "
             + "LEFT JOIN FETCH s.grupoEstado ge "

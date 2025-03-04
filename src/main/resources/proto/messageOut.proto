@@ -11,5 +11,7 @@ message MensajeJSON {
     
     string mensajeJson = 3;             // JSON serializado como string
     
-    int32 idSector = 4;                   // Si es necesario se setea el idSector para definir destinatarios
+    int32 idSector = 4;                 // Si es necesario se setea el idSector para definir destinatarios
+
+    int32 idUsuario = 5;                // Si es necesario se setea el idUsuario para definir destinatario.
 }

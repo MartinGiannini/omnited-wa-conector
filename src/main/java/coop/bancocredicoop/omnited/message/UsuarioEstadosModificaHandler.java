@@ -7,21 +7,23 @@ import coop.bancocredicoop.omnited.message.models.UsuarioDatos;
 import coop.bancocredicoop.omnited.service.db.UsuarioService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
-public class ModificaUsuarioHabilidadesHandler implements RabbitMessageHandler {
+public class UsuarioEstadosModificaHandler implements RabbitMessageHandler {
 
     private final UsuarioService usuarioService;
     private final MessageToRabbit messageToRabbit;
 
-    public ModificaUsuarioHabilidadesHandler(
+    public UsuarioEstadosModificaHandler(
             UsuarioService usuarioService,
-            MessageToRabbit messageToRabbit) {
+            MessageToRabbit messageToRabbit
+    ) {
         this.usuarioService = usuarioService;
         this.messageToRabbit = messageToRabbit;
     }
 
+    // Crear una instancia de RetornoIngreso
     RetornoMensajeRealizado mensajeRealizado = new RetornoMensajeRealizado(
             "Operación Exitosa",
-            "Las habilidades fueron actualizadas correctamente.",
+            "Los estados fueron actualizados correctamente.",
             "ok"
     );
 
@@ -32,17 +34,18 @@ public class ModificaUsuarioHabilidadesHandler implements RabbitMessageHandler {
             ObjectMapper objectMapper = new ObjectMapper();
             UsuarioDatos usuarioDatos = objectMapper.readValue(mensajeJson, UsuarioDatos.class);
 
-            // Llamar al servicio para guardar las habilidades
-            usuarioService.actualizaUsuarioHabilidad(usuarioDatos.getIngresoDatos().getUsuario());
+            // Llamar al servicio para guardar los estados
+            usuarioService.actualizarUsuarioEstado(usuarioDatos.getIngresoDatos().getUsuario());
 
             String retornoCambios = objectMapper.writeValueAsString(usuarioDatos.getIngresoDatos().getUsuario());
-            messageToRabbit.processMessageDestino(idMensaje, "usuarioHabilidadesDB", retornoCambios, usuarioDatos.getIngresoDatos().getIdSector());
+            messageToRabbit.processMessageMulticast(idMensaje, "usuarioEstadosSectorDB", retornoCambios, usuarioDatos.getIngresoDatos().getIdSector());
+            messageToRabbit.processMessageMulticast(idMensaje, "usuarioEstadosUsuarioDB", retornoCambios, usuarioDatos.getIngresoDatos().getUsuario().getIdUsuario());
 
-            String mensaje = objectMapper.writeValueAsString(mensajeRealizado);
-            messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", mensaje);
+            String retorno = objectMapper.writeValueAsString(mensajeRealizado);
+            messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
 
         } catch (JsonProcessingException e) {
-            System.err.println("Error procesando habilidades de usuario: " + e.getMessage());
+            System.err.println("Error procesando estados del usuario: " + e.getMessage());
             throw e;
         }
     }

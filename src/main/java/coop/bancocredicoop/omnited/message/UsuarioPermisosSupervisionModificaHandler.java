@@ -7,12 +7,12 @@ import coop.bancocredicoop.omnited.message.models.UsuarioDatos;
 import coop.bancocredicoop.omnited.service.db.UsuarioService;
 import coop.bancocredicoop.omnited.service.rabbit.RabbitMessageHandler;
 
-public class ModificaUsuarioPermisosSupervisionHandler implements RabbitMessageHandler {
+public class UsuarioPermisosSupervisionModificaHandler implements RabbitMessageHandler {
 
     private final UsuarioService usuarioService;
     private final MessageToRabbit messageToRabbit;
 
-    public ModificaUsuarioPermisosSupervisionHandler(
+    public UsuarioPermisosSupervisionModificaHandler(
             UsuarioService usuarioService,
             MessageToRabbit messageToRabbit
     ) {
@@ -36,6 +36,10 @@ public class ModificaUsuarioPermisosSupervisionHandler implements RabbitMessageH
             // Llamar al servicio para guardar los permisos
             usuarioService.actualizaUsuarioPermisoSupervision(usuarioDatos.getIngresoDatos().getUsuario());
 
+            String retornoCambios = objectMapper.writeValueAsString(usuarioDatos.getIngresoDatos().getUsuario());
+            messageToRabbit.processMessageMulticast(idMensaje, "usuarioPermisosSupervisionSectorDB", retornoCambios, usuarioDatos.getIngresoDatos().getIdSector());
+            messageToRabbit.processMessageMulticast(idMensaje, "usuarioPermisosSupervisionUsuarioDB", retornoCambios, usuarioDatos.getIngresoDatos().getUsuario().getIdUsuario());
+            
             String retorno = objectMapper.writeValueAsString(cambios);
             messageToRabbit.processMessage(idMensaje, "cambiosRealizadosDB", retorno);
 
