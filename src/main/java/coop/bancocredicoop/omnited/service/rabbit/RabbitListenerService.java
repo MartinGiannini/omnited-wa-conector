@@ -2,24 +2,6 @@ package coop.bancocredicoop.omnited.service.rabbit;
 
 import coop.bancocredicoop.omnited.config.MessageOut.MensajeJSON;
 import coop.bancocredicoop.omnited.message.MessageToRabbit;
-import coop.bancocredicoop.omnited.message.GrupoEstadosModificaHandler;
-import coop.bancocredicoop.omnited.message.GrupoHabilidadesModificaHandler;
-import coop.bancocredicoop.omnited.message.ColaModificaHandler;
-import coop.bancocredicoop.omnited.message.UsuarioEstadosModificaHandler;
-import coop.bancocredicoop.omnited.message.UsuarioHabilidadesModificaHandler;
-import coop.bancocredicoop.omnited.message.UsuarioLoginHandler;
-import coop.bancocredicoop.omnited.message.UsuarioModificaHandler;
-import coop.bancocredicoop.omnited.message.UsuarioPermisosOperacionModificaHandler;
-import coop.bancocredicoop.omnited.message.UsuarioPermisosSupervisionModificaHandler;
-import coop.bancocredicoop.omnited.service.db.ColaHabilidadService;
-import coop.bancocredicoop.omnited.service.db.ColaService;
-import coop.bancocredicoop.omnited.service.db.EstrategiaService;
-import coop.bancocredicoop.omnited.service.db.GrupoEstadoService;
-import coop.bancocredicoop.omnited.service.db.GrupoHabilidadService;
-import coop.bancocredicoop.omnited.service.db.PermisoService;
-import coop.bancocredicoop.omnited.service.db.SectorService;
-import coop.bancocredicoop.omnited.service.db.UsuarioSectorService;
-import coop.bancocredicoop.omnited.service.db.UsuarioService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -45,27 +27,11 @@ public class RabbitListenerService {
      * @param messageToRabbit
      */
     public RabbitListenerService(
-            UsuarioService usuarioService,
-            UsuarioSectorService usuarioSectorService,
-            SectorService sectorService,
-            GrupoEstadoService grupoEstadoService,
-            GrupoHabilidadService grupoHabilidadService,
-            PermisoService permisoService,
-            EstrategiaService estrategiaService,
-            ColaService colaService,
-            ColaHabilidadService colaHabilidadService,
+            
             MessageToRabbit messageToRabbit
     ) {
         // Registrar handlers para cada tipo de mensaje
-        handlers.put("usuariologinWS", new UsuarioLoginHandler(usuarioService, sectorService, permisoService, grupoEstadoService, grupoHabilidadService, estrategiaService, messageToRabbit));
-        handlers.put("usuarioadminWS", new UsuarioModificaHandler(usuarioService, usuarioSectorService, sectorService, messageToRabbit));
-        handlers.put("colaadminWS", new ColaModificaHandler(colaService, colaHabilidadService, messageToRabbit));
-        handlers.put("usuarioHabilidadesWS", new UsuarioHabilidadesModificaHandler(usuarioService, messageToRabbit));
-        handlers.put("usuarioEstadosWS", new UsuarioEstadosModificaHandler(usuarioService, messageToRabbit));
-        handlers.put("usuarioPermisosOperacionWS", new UsuarioPermisosOperacionModificaHandler(usuarioService, messageToRabbit));
-        handlers.put("usuarioPermisosSupervisionWS", new UsuarioPermisosSupervisionModificaHandler(usuarioService, messageToRabbit));
-        handlers.put("grupoHabilidadesWS", new GrupoHabilidadesModificaHandler(grupoHabilidadService, messageToRabbit));
-        handlers.put("grupoEstadosWS", new GrupoEstadosModificaHandler(grupoEstadoService, messageToRabbit));
+        
     }
 
     /**
@@ -75,8 +41,7 @@ public class RabbitListenerService {
      * @param message
      */
     @RabbitListener(queues = {
-        "#{@environment.getProperty('spring.rabbitmq.colaWS')}",
-        "#{@environment.getProperty('spring.rabbitmq.colaCR')}"
+        
     })
 
     /**

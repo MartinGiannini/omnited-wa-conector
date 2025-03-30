@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 @Service
 public class RabbitSenderService {
 
-    @Value("${spring.rabbitmq.routing-key}.db")
-    private String routingKeyOut;
+    @Value("${spring.rabbitmq.routing-key}.dbu")
+    private String routingKeyOutUnicast;
+    
+    @Value("${spring.rabbitmq.routing-key}.dbm")
+    private String routingKeyOutMulticast;
+    
+    @Value("${spring.rabbitmq.routing-key}.dbstream")
+    private String routingKeyOutUnicastToStream;
 
     @Value("${spring.rabbitmq.exchange}")
     private String exchangeName;
@@ -25,9 +31,29 @@ public class RabbitSenderService {
      *
      * @param message
      */
-    public void sendMessage(MensajeJSON message) {
+    public void sendMessageUnicast(MensajeJSON message) {
         
-        rabbitTemplate.convertAndSend(exchangeName, routingKeyOut, message);
+        rabbitTemplate.convertAndSend(exchangeName, routingKeyOutUnicast, message);
+    }
+    
+    /**
+     * Enviar un mensaje a RabbitMQ.
+     *
+     * @param message
+     */
+    public void sendMessageUnicastToStream(MensajeJSON message) {
+        
+        rabbitTemplate.convertAndSend(exchangeName, routingKeyOutUnicastToStream, message);
+    }
+    
+    /**
+     * Enviar un mensaje a RabbitMQ.
+     *
+     * @param message
+     */
+    public void sendMessageMulticast(MensajeJSON message) {
+        
+        rabbitTemplate.convertAndSend(exchangeName, routingKeyOutMulticast, message);
     }
 
 }
