@@ -13,11 +13,9 @@
 
     <name>omnited-wa-conector</name>
     <description>Conector a WhatsApp</description>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
         
         
@@ -36,6 +34,24 @@
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-amqp</artifactId>
             <version>2.2.22.RELEASE</version>
+        </dependency>
+        
+        <!-- (Opcional) Si quieres usar Lombok, puedes añadirlo para reducir boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+       
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>5.2.1.RELEASE</version>
         </dependency>
        
         <!-- Model Mapper -->

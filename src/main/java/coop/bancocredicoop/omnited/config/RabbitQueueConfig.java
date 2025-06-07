@@ -13,9 +13,12 @@ public class RabbitQueueConfig {
 
     @Value("${spring.rabbitmq.exchange}")
     private String exchangeName;
-
+    
     @Value("${spring.rabbitmq.routing-key}")
     private String routingKey;
+    
+    @Value("${spring.rabbitmq.colaDB_WA}")
+    private String colaEntranteDB_WA;
 
     /**
      * Bean para el envio Broadcast
@@ -26,4 +29,21 @@ public class RabbitQueueConfig {
         return new TopicExchange(exchangeName);
     }
     
+    @Bean
+    public Queue colaEntranteDB_WA() {
+        return new Queue(colaEntranteDB_WA, true); // Cola de entrada DB (duradera)
+    }
+
+    /**
+     * Binding de la cola de entrada WA al exchange con una clave de
+     * enrutamiento específica.
+     *
+     * @param colaEntranteDB_WA
+     * @param exchange
+     * @return
+     */
+    @Bean
+    public Binding bindingColaEntranteDB_WA(Queue colaEntranteDB_WA, TopicExchange exchange) {
+        return BindingBuilder.bind(colaEntranteDB_WA).to(exchange).with(routingKey + ".db_wa");
+    }
 }

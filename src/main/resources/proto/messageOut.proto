@@ -14,4 +14,6 @@ message MensajeJSON {
     int32 idSector = 4;                 // Si es necesario se setea el idSector para definir destinatarios
 
     int32 idUsuario = 5;                // Si es necesario se setea el idUsuario para definir destinatario.
+
+    int64 fechaEnvio = 6;               // milisegundos desde epoch
 }

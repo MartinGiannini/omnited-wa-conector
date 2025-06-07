@@ -3,8 +3,6 @@
 
 package coop.bancocredicoop.omnited.config;
 
-import com.google.protobuf.GeneratedMessageV3;
-
 public final class MessageOut {
   private MessageOut() {}
   public static void registerAllExtensions(
@@ -99,6 +97,16 @@ public final class MessageOut {
      * @return The idUsuario.
      */
     int getIdUsuario();
+
+    /**
+     * <pre>
+     * milisegundos desde epoch
+     * </pre>
+     *
+     * <code>int64 fechaEnvio = 6;</code>
+     * @return The fechaEnvio.
+     */
+    long getFechaEnvio();
   }
   /**
    * <pre>
@@ -125,7 +133,7 @@ public final class MessageOut {
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
-        GeneratedMessageV3.UnusedPrivateParameter unused) {
+        UnusedPrivateParameter unused) {
       return new MensajeJSON();
     }
 
@@ -318,6 +326,21 @@ public final class MessageOut {
       return idUsuario_;
     }
 
+    public static final int FECHAENVIO_FIELD_NUMBER = 6;
+    private long fechaEnvio_ = 0L;
+    /**
+     * <pre>
+     * milisegundos desde epoch
+     * </pre>
+     *
+     * <code>int64 fechaEnvio = 6;</code>
+     * @return The fechaEnvio.
+     */
+    @java.lang.Override
+    public long getFechaEnvio() {
+      return fechaEnvio_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -347,6 +370,9 @@ public final class MessageOut {
       if (idUsuario_ != 0) {
         output.writeInt32(5, idUsuario_);
       }
+      if (fechaEnvio_ != 0L) {
+        output.writeInt64(6, fechaEnvio_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -373,6 +399,10 @@ public final class MessageOut {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, idUsuario_);
       }
+      if (fechaEnvio_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, fechaEnvio_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -398,6 +428,8 @@ public final class MessageOut {
           != other.getIdSector()) return false;
       if (getIdUsuario()
           != other.getIdUsuario()) return false;
+      if (getFechaEnvio()
+          != other.getFechaEnvio()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -419,6 +451,9 @@ public final class MessageOut {
       hash = (53 * hash) + getIdSector();
       hash = (37 * hash) + IDUSUARIO_FIELD_NUMBER;
       hash = (53 * hash) + getIdUsuario();
+      hash = (37 * hash) + FECHAENVIO_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getFechaEnvio());
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -557,6 +592,7 @@ public final class MessageOut {
         mensajeJson_ = "";
         idSector_ = 0;
         idUsuario_ = 0;
+        fechaEnvio_ = 0L;
         return this;
       }
 
@@ -604,6 +640,9 @@ public final class MessageOut {
         }
         if (((from_bitField0_ & 0x00000010) != 0)) {
           result.idUsuario_ = idUsuario_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.fechaEnvio_ = fechaEnvio_;
         }
       }
 
@@ -672,6 +711,9 @@ public final class MessageOut {
         if (other.getIdUsuario() != 0) {
           setIdUsuario(other.getIdUsuario());
         }
+        if (other.getFechaEnvio() != 0L) {
+          setFechaEnvio(other.getFechaEnvio());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -723,12 +765,15 @@ public final class MessageOut {
                 bitField0_ |= 0x00000010;
                 break;
               } // case 40
+              case 48: {
+                fechaEnvio_ = input.readInt64();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
               default: {
-                  /*
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                //if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
-                }
-                  */
+                //}
                 break;
               } // default:
             } // switch (tag)
@@ -1105,6 +1150,50 @@ public final class MessageOut {
         onChanged();
         return this;
       }
+
+      private long fechaEnvio_ ;
+      /**
+       * <pre>
+       * milisegundos desde epoch
+       * </pre>
+       *
+       * <code>int64 fechaEnvio = 6;</code>
+       * @return The fechaEnvio.
+       */
+      @java.lang.Override
+      public long getFechaEnvio() {
+        return fechaEnvio_;
+      }
+      /**
+       * <pre>
+       * milisegundos desde epoch
+       * </pre>
+       *
+       * <code>int64 fechaEnvio = 6;</code>
+       * @param value The fechaEnvio to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFechaEnvio(long value) {
+        
+        fechaEnvio_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * milisegundos desde epoch
+       * </pre>
+       *
+       * <code>int64 fechaEnvio = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFechaEnvio() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        fechaEnvio_ = 0L;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1184,10 +1273,10 @@ public final class MessageOut {
   static {
     java.lang.String[] descriptorData = {
       "\n\020messageOut.proto\022\"coop.bancocredicoop." +
-      "omnited.config\"o\n\013MensajeJSON\022\021\n\tidMensa" +
-      "je\030\001 \001(\t\022\023\n\013mensajeType\030\002 \001(\t\022\023\n\013mensaje" +
-      "Json\030\003 \001(\t\022\020\n\010idSector\030\004 \001(\005\022\021\n\tidUsuari" +
-      "o\030\005 \001(\005b\006proto3"
+      "omnited.config\"\203\001\n\013MensajeJSON\022\021\n\tidMens" +
+      "aje\030\001 \001(\t\022\023\n\013mensajeType\030\002 \001(\t\022\023\n\013mensaj" +
+      "eJson\030\003 \001(\t\022\020\n\010idSector\030\004 \001(\005\022\021\n\tidUsuar" +
+      "io\030\005 \001(\005\022\022\n\nfechaEnvio\030\006 \001(\003b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1198,7 +1287,7 @@ public final class MessageOut {
     internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_coop_bancocredicoop_omnited_config_MensajeJSON_descriptor,
-        new java.lang.String[] { "IdMensaje", "MensajeType", "MensajeJson", "IdSector", "IdUsuario", });
+        new java.lang.String[] { "IdMensaje", "MensajeType", "MensajeJson", "IdSector", "IdUsuario", "FechaEnvio", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
